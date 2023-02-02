@@ -6,9 +6,3 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-
-export const Section = styled.section``;
-
-export const SectionTitle = styled.h1`
-  text-align: center;
-`;
