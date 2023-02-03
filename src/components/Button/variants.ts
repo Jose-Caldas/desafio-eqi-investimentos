@@ -14,16 +14,16 @@ export interface ButtonVariant {
 export const buttonPrimary: ButtonVariant = {
   enabled: {
     button: {
-      backgroundColor: "#FFFFFF",
+      backgroundColor: "transparent",
       border: "1px solid",
-      borderColor: "#000",
+      borderColor: "#9999",
     },
   },
   disabled: {
     button: {
-      backgroundColor: "#BBBBBB",
+      backgroundColor: "#9999",
       border: "1px solid",
-      borderColor: "#BBBBBB",
+      borderColor: "#9999",
     },
   },
 };
@@ -31,14 +31,14 @@ export const buttonPrimary: ButtonVariant = {
 export const buttonSecondary: ButtonVariant = {
   enabled: {
     button: {
-      backgroundColor: "orange",
+      backgroundColor: "#f27e22",
       border: "none",
       borderColor: "none",
     },
   },
   disabled: {
     button: {
-      backgroundColor: "#BBBBBB",
+      backgroundColor: "#9999",
       border: "none",
       borderColor: "none",
     },

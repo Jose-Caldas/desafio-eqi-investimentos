@@ -1,21 +1,21 @@
 import { CircularProgress } from "@material-ui/core";
+import { ButtonHTMLAttributes } from "react";
 import { Wrapper } from "./styles";
 import { buttonTypes } from "./variants";
 
 export type ButtonProps = {
   title: string;
-  onClick: () => void;
   isLoading?: boolean;
   disabled?: boolean;
   types: "primary" | "secondary";
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
   title,
-  onClick,
   isLoading = false,
   disabled,
   types = "primary",
+  ...props
 }: ButtonProps) => {
   const buttonVariants = buttonTypes[types];
 
@@ -25,13 +25,13 @@ const Button = ({
 
   return (
     <Wrapper
-      onClick={onClick}
       disabled={isLoading || disabled}
       style={{
         ...buttonStyle.button,
       }}
+      {...props}
     >
-      {isLoading ? <CircularProgress size={15} /> : title}
+      {isLoading ? <CircularProgress size={15} color="inherit" /> : title}
     </Wrapper>
   );
 };
