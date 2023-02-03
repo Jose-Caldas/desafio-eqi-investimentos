@@ -8,7 +8,7 @@ export const Label = styled.label`
 
 export const CustomInput = styled.input`
   border: none;
-  padding: 20px;
+  padding: 15px;
   outline: none;
   background-color: transparent;
   border-bottom: 1px solid #000;

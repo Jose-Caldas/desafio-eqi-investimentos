@@ -4,6 +4,7 @@ import { Header, Wrapper, Title } from "./styles";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import Button from "../../Button";
 import Input from "../../Input";
+import { indexingData } from "../../Input/input.data";
 
 const Indexing = () => {
   const [loading, setLoading] = useState(false);
@@ -22,9 +23,9 @@ const Indexing = () => {
         <Title>Rendimento</Title>
         <InfoOutlinedIcon fontSize="small" />
       </Header>
-      <Input label="Aporte Anual" id="aporte-inicial" name="aporte-inicial" />
-      <Input label="Rentabilidade" id="aporte-inicial" name="aporte-inicial" />
-      <Input label="CDI (ao ano)" id="aporte-inicial" name="aporte-inicial" />
+      {indexingData.map((indexing) => (
+        <Input key={indexing.id} label={indexing.label} id={indexing.id} />
+      ))}
       <Button
         title="Simular"
         onClick={handleOnClick}

@@ -1,16 +1,16 @@
 import { Wrapper, Label, CustomInput } from "./styles";
 
 export type InputProps = {
+  id: number;
   label: string;
-  id: string;
-  name: string;
+  value?: string;
 };
 
-const Input = ({ label, id, name }: InputProps) => {
+const Input = ({ label, id, value }: InputProps) => {
   return (
-    <Wrapper>
+    <Wrapper key={id}>
       <Label>{label}</Label>
-      <CustomInput type="number" id={id} name={name} />
+      <CustomInput value={value} />
     </Wrapper>
   );
 };

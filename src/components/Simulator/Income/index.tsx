@@ -4,6 +4,7 @@ import { Header, Wrapper, Title } from "./styles";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import Button from "../../Button";
 import Input from "../../Input";
+import { incomeData } from "../../Input/input.data";
 
 const Income = () => {
   const [loading, setLoading] = useState(false);
@@ -23,13 +24,9 @@ const Income = () => {
         <Title>Rendimento</Title>
         <InfoOutlinedIcon fontSize="small" />
       </Header>
-      <Input label="Aporte Inicial" id="aporte-inicial" name="aporte-inicial" />
-      <Input
-        label="Prazo (em meses)"
-        id="aporte-inicial"
-        name="aporte-inicial"
-      />
-      <Input label="IPCA (ao ano)" id="aporte-inicial" name="aporte-inicial" />
+      {incomeData.map((income) => (
+        <Input id={income.id} label={income.label} key={income.id} />
+      ))}
       <Button
         title="Limpar campos"
         onClick={handleOnClick}

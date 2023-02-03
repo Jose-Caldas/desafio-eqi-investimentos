@@ -30,4 +30,17 @@ export const Options = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-export const Result = styled.div``;
+export const Result = styled.div`
+  background-color: white;
+  padding: 0 20px;
+`;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+
+  p {
+    background-color: #eee;
+  }
+`;
