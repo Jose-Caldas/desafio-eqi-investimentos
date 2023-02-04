@@ -67,7 +67,7 @@ const Indexing = () => {
   return (
     <Wrapper>
       <Header>
-        <Title>Rendimento</Title>
+        <Title>Tipos de indexação</Title>
         <InfoOutlinedIcon fontSize="small" />
       </Header>
       <IndexingType>
