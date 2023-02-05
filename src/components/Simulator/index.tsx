@@ -1,5 +1,7 @@
+import { CircularProgress } from "@material-ui/core";
 import { useState } from "react";
 import { GET_SIMULATORS } from "../../api";
+import useFetch from "../../Hooks/useFetch";
 
 import Income from "./Income";
 import Indexing from "./Indexing";
@@ -15,14 +17,13 @@ import {
 
 const Simulator = () => {
   const [cards, setCards] = useState([]);
+  const { loading, request } = useFetch();
 
   async function getIndicators() {
     const { url, options } = GET_SIMULATORS();
 
-    const response = await fetch(url, options);
-    const data = await response.json();
-
-    setCards(data);
+    const { response, data } = await request(url, options);
+    if (response) setCards(data);
   }
 
   return (
@@ -37,9 +38,13 @@ const Simulator = () => {
 
         <Result>
           <Grid>
-            {cards.map(({ valorFinalBruto }) => (
-              <p>{valorFinalBruto}</p>
-            ))}
+            {cards.map(({ valorFinalBruto }) =>
+              loading ? (
+                <CircularProgress size={15} color="inherit" />
+              ) : (
+                <p>{valorFinalBruto}</p>
+              )
+            )}
           </Grid>
 
           <button onClick={getIndicators}>Simular</button>

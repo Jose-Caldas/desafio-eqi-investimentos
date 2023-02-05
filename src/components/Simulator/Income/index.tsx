@@ -18,19 +18,22 @@ import CheckIcon from "@material-ui/icons/Check";
 import Button from "../../Button";
 import { GET_INDICATORS } from "../../../api";
 import CardIncome from "../../CardIncome";
+import useFetch from "../../../Hooks/useFetch";
+import { CircularProgress } from "@material-ui/core";
 
 const Income = () => {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [checkedLeft, setCheckedLeft] = useState(false);
   const [checkedRight, setCheckedRight] = useState(false);
   const [indicators, setIndicator] = useState([]);
+  const { loading, request } = useFetch();
 
   const handleOnClick = () => {
     alert("Os campos do formulário serão limpos!");
-    setLoading(true);
+    setIsLoading(true);
 
     setTimeout(() => {
-      setLoading(false);
+      setIsLoading(false);
     }, 3000);
   };
 
@@ -55,15 +58,14 @@ const Income = () => {
   async function getIndicators() {
     const { url, options } = GET_INDICATORS();
 
-    const response = await fetch(url, options);
-    const data = await response.json();
-
-    setIndicator(data);
+    const { response, data } = await request(url, options);
+    if (response) setIndicator(data);
   }
 
   useEffect(() => {
     setCheckedLeft(true);
     getIndicators();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -94,17 +96,21 @@ const Income = () => {
           <p>Valor vindo da API</p>
         </Field>
         <Field>
-          {indicators.map(({ nome, valor }) => (
-            <CardIncome key={nome} label={nome} value={valor} />
-          ))}
+          {indicators.map(({ nome, valor }) =>
+            loading ? (
+              <CircularProgress size={15} color="inherit" />
+            ) : (
+              <CardIncome key={nome} label={nome} value={valor} />
+            )
+          )}
         </Field>
       </Form>
       <Button
         title="Limpar campos"
         onClick={handleOnClick}
-        isLoading={loading}
+        isLoading={isLoading}
         types="primary"
-        disabled={loading}
+        disabled={isLoading}
       />
     </Wrapper>
   );

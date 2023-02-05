@@ -8,8 +8,8 @@ export type InputProps = {
 const CardIncome = ({ label, value }: InputProps) => {
   return (
     <Wrapper>
-      <Label>{label}</Label>
-      <CustomInput value={value} />
+      <Label>{`${label.toUpperCase()} (ao ano)`}</Label>
+      <CustomInput value={`${value}%`} />
     </Wrapper>
   );
 };
