@@ -1,5 +1,6 @@
-import { Card } from "./Card";
-import { cardData } from "./Card/card.data";
+import { useState } from "react";
+import { GET_SIMULATORS } from "../../api";
+
 import Income from "./Income";
 import Indexing from "./Indexing";
 import {
@@ -13,6 +14,17 @@ import {
 } from "./styles";
 
 const Simulator = () => {
+  const [cards, setCards] = useState([]);
+
+  async function getIndicators() {
+    const { url, options } = GET_SIMULATORS();
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    setCards(data);
+  }
+
   return (
     <Wrapper>
       <Title>Simulador de investimentos</Title>
@@ -25,15 +37,12 @@ const Simulator = () => {
 
         <Result>
           <Grid>
-            {cardData.map((card) => (
-              <Card
-                key={card.id}
-                title={card.title}
-                value={card.value}
-                id={card.id}
-              />
+            {cards.map(({ valorFinalBruto }) => (
+              <p>{valorFinalBruto}</p>
             ))}
           </Grid>
+
+          <button onClick={getIndicators}>Simular</button>
           <SubTitle>Pojeção de Valores</SubTitle>
         </Result>
       </Section>

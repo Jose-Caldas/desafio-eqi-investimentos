@@ -8,11 +8,15 @@ import {
   LeftButtom,
   CenterButton,
   RightButtom,
+  Form,
+  Label,
+  Field,
+  Input,
 } from "./styles";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import Button from "../../Button";
-import Input from "../../Input";
-import { indexingData } from "../../Input/input.data";
+// import Input from "../../Input";
+// import { indexingData } from "../../Input/input.data";
 import CheckIcon from "@material-ui/icons/Check";
 
 const Indexing = () => {
@@ -90,9 +94,18 @@ const Indexing = () => {
           Fixado
         </RightButtom>
       </IndexingType>
-      {indexingData.map((indexing) => (
-        <Input key={indexing.id} label={indexing.label} id={indexing.id} />
-      ))}
+      <Form>
+        <Label>Aporte Mensal</Label>
+        <Input />
+        <Field>
+          <h1>Rentabilidade</h1>
+          <p>Valor vindo da API</p>
+        </Field>
+        <Field>
+          <h1>CDI (ao ano)</h1>
+          <p>Valor vindo da API</p>
+        </Field>
+      </Form>
       <Button
         title="Simular"
         onClick={handleOnClick}

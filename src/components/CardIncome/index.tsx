@@ -1,18 +1,17 @@
 import { Wrapper, Label, CustomInput } from "./styles";
 
 export type InputProps = {
-  id: number;
   label: string;
-  value?: string;
+  value: string;
 };
 
-const Input = ({ label, id, value }: InputProps) => {
+const CardIncome = ({ label, value }: InputProps) => {
   return (
-    <Wrapper key={id}>
+    <Wrapper>
       <Label>{label}</Label>
       <CustomInput value={value} />
     </Wrapper>
   );
 };
 
-export default Input;
+export default CardIncome;

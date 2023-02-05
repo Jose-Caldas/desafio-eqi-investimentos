@@ -8,17 +8,22 @@ import {
   LeftButtom,
   RightButtom,
   Icon,
+  Label,
+  Input,
+  Form,
+  Field,
 } from "./styles";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CheckIcon from "@material-ui/icons/Check";
 import Button from "../../Button";
-import Input from "../../Input";
-import { incomeData } from "../../Input/input.data";
+import { GET_INDICATORS } from "../../../api";
+import CardIncome from "../../CardIncome";
 
 const Income = () => {
   const [loading, setLoading] = useState(false);
   const [checkedLeft, setCheckedLeft] = useState(false);
   const [checkedRight, setCheckedRight] = useState(false);
+  const [indicators, setIndicator] = useState([]);
 
   const handleOnClick = () => {
     alert("Os campos do formulário serão limpos!");
@@ -47,8 +52,18 @@ const Income = () => {
     color: checkedRight ? "#FFFF" : "#000",
   };
 
+  async function getIndicators() {
+    const { url, options } = GET_INDICATORS();
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    setIndicator(data);
+  }
+
   useEffect(() => {
     setCheckedLeft(true);
+    getIndicators();
   }, []);
 
   return (
@@ -71,9 +86,19 @@ const Income = () => {
           Líquido
         </RightButtom>
       </IncomingType>
-      {incomeData.map((income) => (
-        <Input id={income.id} label={income.label} key={income.id} />
-      ))}
+      <Form>
+        <Label>Aporte Inicial</Label>
+        <Input />
+        <Field>
+          <h1>Prazo (em meses)</h1>
+          <p>Valor vindo da API</p>
+        </Field>
+        <Field>
+          {indicators.map(({ nome, valor }) => (
+            <CardIncome key={nome} label={nome} value={valor} />
+          ))}
+        </Field>
+      </Form>
       <Button
         title="Limpar campos"
         onClick={handleOnClick}
