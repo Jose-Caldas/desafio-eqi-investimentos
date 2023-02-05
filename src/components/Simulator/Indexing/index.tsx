@@ -8,30 +8,15 @@ import {
   LeftButtom,
   CenterButton,
   RightButtom,
-  Form,
-  Label,
-  Field,
-  Input,
 } from "./styles";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import Button from "../../Button";
-// import Input from "../../Input";
-// import { indexingData } from "../../Input/input.data";
+
 import CheckIcon from "@material-ui/icons/Check";
 
 const Indexing = () => {
-  const [loading, setLoading] = useState(false);
   const [checkedLeft, setCheckedLeft] = useState(false);
   const [checkedRight, setCheckedRight] = useState(false);
   const [checkedCenter, setCheckedCenter] = useState(false);
-
-  const handleOnClick = () => {
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  };
 
   const handleLeftButton = () => {
     setCheckedLeft(!checkedLeft);
@@ -94,25 +79,6 @@ const Indexing = () => {
           Fixado
         </RightButtom>
       </IndexingType>
-      <Form>
-        <Label>Aporte Mensal</Label>
-        <Input />
-        <Field>
-          <h1>Rentabilidade</h1>
-          <p>Valor vindo da API</p>
-        </Field>
-        <Field>
-          <h1>CDI (ao ano)</h1>
-          <p>Valor vindo da API</p>
-        </Field>
-      </Form>
-      <Button
-        title="Simular"
-        onClick={handleOnClick}
-        isLoading={loading}
-        types="secondary"
-        disabled={loading}
-      />
     </Wrapper>
   );
 };

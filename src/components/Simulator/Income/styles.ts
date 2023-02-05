@@ -55,33 +55,3 @@ export const Icon = styled.div`
   color: white;
   left: 15px;
 `;
-
-export const Label = styled.label`
-  font-size: 12px;
-  font-weight: bold;
-`;
-
-export const Input = styled.input`
-  border: none;
-  padding: 15px;
-  outline: none;
-  background-color: transparent;
-  border-bottom: 1px solid #000;
-  margin-bottom: 15px;
-`;
-
-export const Form = styled.form`
-  margin-bottom: 40px;
-`;
-export const Field = styled.div`
-  width: 100%;
-  border-bottom: 1px solid #000;
-
-  h1 {
-    font-size: 12px;
-  }
-
-  p {
-    color: red;
-  }
-`;
