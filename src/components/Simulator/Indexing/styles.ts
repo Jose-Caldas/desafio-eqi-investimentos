@@ -35,6 +35,7 @@ export const LeftButtom = styled.button`
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   position: relative;
+  box-sizing: border-box;
 
   cursor: pointer;
 `;
@@ -58,6 +59,7 @@ export const RightButtom = styled.button`
   border: none;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+  box-sizing: border-box;
   cursor: pointer;
 `;
 

@@ -38,15 +38,15 @@ const Indexing = () => {
 
   const styledButtonLeft = {
     background: checkedLeft ? "#f27e22" : "#FFFFFF",
-    color: checkedLeft ? "#FFFF" : "#000",
+    color: checkedLeft ? "#FFFF" : "#333",
   };
   const styledButtonRight = {
     background: checkedRight ? "#f27e22" : "#FFFFFF",
-    color: checkedRight ? "#FFFF" : "#000",
+    color: checkedRight ? "#FFFF" : "#333",
   };
   const styledButtonCenter = {
     background: checkedCenter ? "#f27e22" : "#FFFFFF",
-    color: checkedCenter ? "#FFFF" : "#000",
+    color: checkedCenter ? "#FFFF" : "#333",
   };
 
   useEffect(() => {

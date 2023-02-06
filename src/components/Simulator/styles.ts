@@ -24,45 +24,72 @@ export const Section = styled.section`
   gap: 80px;
 `;
 
-export const Result = styled.div`
-  padding: 0 20px;
-`;
-
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 30px;
-  margin-bottom: 20px;
 `;
 
-export const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #000;
+export const Form = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+`;
 
-  p {
-    display: flex;
-    font-size: 16px;
-    margin: none !important;
+export const Result = styled.div`
+  padding: 0 20px;
+
+  button {
+    &:disabled {
+      background-color: red;
+    }
   }
 `;
 
-export const ApiBox = styled.div`
-  border-bottom: 1px solid #000;
+export const ResultContainer = styled.div`
+  width: 100%;
+`;
+export const SimulateContainer = styled.div``;
+
+export const GridCard = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+  width: 100%;
 `;
 
-export const Label = styled.label`
-  font-size: 12px;
-`;
-
-export const Input = styled.input`
-  border: none;
-  padding: 16px 0;
-  outline: none;
-  background-color: transparent;
-  font-size: 16px;
+export const Box = styled.div`
+  border-bottom: 1px solid #333;
+  margin: 20px 0 30px 0;
 `;
 
 export const Span = styled.span`
   text-transform: uppercase;
+`;
+
+////////
+
+export const Card = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.25);
+
+  &:nth-child(6) {
+    p {
+      color: #08a85f;
+    }
+  }
+  &:nth-child(4) {
+    p {
+      color: #08a85f;
+    }
+  }
+`;
+
+export const Text = styled.h1`
+  font-size: 12px;
 `;

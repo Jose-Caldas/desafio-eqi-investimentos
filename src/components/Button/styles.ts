@@ -7,7 +7,6 @@ export const Wrapper = styled.button`
   font-weight: bold;
   &:hover {
     color: gray;
-    background-color: red;
   }
 
   cursor: pointer;
