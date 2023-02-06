@@ -3,82 +3,85 @@ import React, { useEffect, useState } from "react";
 import {
   Header,
   Wrapper,
-  Title,
-  IndexingType,
-  LeftButtom,
-  CenterButton,
-  RightButtom,
+  IndexingTitle,
+  IndexingButtons,
+  IndexingLeft,
+  IndexingCenter,
+  IndexingRight,
 } from "./styles";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 
 import CheckIcon from "@material-ui/icons/Check";
 
 const Indexing = () => {
-  const [checkedLeft, setCheckedLeft] = useState(false);
-  const [checkedRight, setCheckedRight] = useState(false);
-  const [checkedCenter, setCheckedCenter] = useState(false);
+  const [indexingButtonLeft, setIndexingButtonLeft] = useState(false);
+  const [indexingButtonRight, setIndexingButtonRight] = useState(false);
+  const [indexingButtonCenter, setIndexingButtonCenter] = useState(false);
 
-  const handleLeftButton = () => {
-    setCheckedLeft(!checkedLeft);
-    if (checkedRight) setCheckedRight(false);
-    if (checkedCenter) setCheckedCenter(false);
+  const handleLeftIndexing = () => {
+    setIndexingButtonLeft(!indexingButtonLeft);
+    if (indexingButtonRight) setIndexingButtonRight(false);
+    if (indexingButtonCenter) setIndexingButtonCenter(false);
   };
 
-  const handleCenterButton = () => {
-    setCheckedCenter(!checkedCenter);
-    if (checkedRight) setCheckedRight(false);
-    if (checkedLeft) setCheckedLeft(false);
+  const handleCenterIndexing = () => {
+    setIndexingButtonCenter(!indexingButtonCenter);
+    if (indexingButtonRight) setIndexingButtonRight(false);
+    if (indexingButtonLeft) setIndexingButtonLeft(false);
   };
 
-  const handleRightButton = () => {
-    setCheckedRight(!checkedRight);
-    if (checkedLeft) setCheckedLeft(false);
-    if (checkedCenter) setCheckedCenter(false);
+  const handleRightIndexing = () => {
+    setIndexingButtonRight(!indexingButtonRight);
+    if (indexingButtonLeft) setIndexingButtonLeft(false);
+    if (indexingButtonCenter) setIndexingButtonCenter(false);
   };
 
   const styledButtonLeft = {
-    background: checkedLeft ? "#f27e22" : "#FFFFFF",
-    color: checkedLeft ? "#FFFF" : "#333",
+    background: indexingButtonLeft ? "#f27e22" : "#FFFFFF",
+    color: indexingButtonLeft ? "#FFFF" : "#333",
   };
   const styledButtonRight = {
-    background: checkedRight ? "#f27e22" : "#FFFFFF",
-    color: checkedRight ? "#FFFF" : "#333",
+    background: indexingButtonRight ? "#f27e22" : "#FFFFFF",
+    color: indexingButtonRight ? "#FFFF" : "#333",
   };
   const styledButtonCenter = {
-    background: checkedCenter ? "#f27e22" : "#FFFFFF",
-    color: checkedCenter ? "#FFFF" : "#333",
+    background: indexingButtonCenter ? "#f27e22" : "#FFFFFF",
+    color: indexingButtonCenter ? "#FFFF" : "#333",
   };
 
   useEffect(() => {
-    setCheckedCenter(true);
+    setIndexingButtonCenter(true);
   }, []);
 
   return (
     <Wrapper>
       <Header>
-        <Title>Tipos de indexação</Title>
+        <IndexingTitle>Tipos de indexação</IndexingTitle>
         <InfoOutlinedIcon fontSize="small" />
       </Header>
-      <IndexingType>
-        <LeftButtom onClick={handleLeftButton} style={{ ...styledButtonLeft }}>
-          {checkedLeft && <CheckIcon fontSize="small" />}
+      <IndexingButtons>
+        <IndexingLeft
+          onClick={handleLeftIndexing}
+          style={{ ...styledButtonLeft }}
+        >
+          {indexingButtonLeft && <CheckIcon fontSize="small" />}
           PRÉ
-        </LeftButtom>
-        <CenterButton
-          onClick={handleCenterButton}
+        </IndexingLeft>
+        <IndexingCenter
+          onClick={handleCenterIndexing}
           style={{ ...styledButtonCenter }}
         >
-          {checkedCenter && <CheckIcon fontSize="small" />}
+          {indexingButtonCenter && <CheckIcon fontSize="small" />}
           POS
-        </CenterButton>
-        <RightButtom
-          onClick={handleRightButton}
+        </IndexingCenter>
+        <IndexingRight
+          onClick={handleRightIndexing}
           style={{ ...styledButtonRight }}
         >
-          {checkedRight && <CheckIcon fontSize="small" />}
+          {indexingButtonRight && <CheckIcon fontSize="small" />}
           Fixado
-        </RightButtom>
-      </IndexingType>
+        </IndexingRight>
+      </IndexingButtons>
     </Wrapper>
   );
 };

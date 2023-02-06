@@ -3,61 +3,61 @@ import { useState, useEffect } from "react";
 import {
   Header,
   Wrapper,
-  Title,
-  IncomingType,
-  LeftButtom,
-  RightButtom,
+  IncomeTitle,
+  IncomeButtons,
+  IncomeLeft,
+  IncomeRight,
   Icon,
 } from "./styles";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CheckIcon from "@material-ui/icons/Check";
 
 const Income = () => {
-  const [checkedLeft, setCheckedLeft] = useState(false);
-  const [checkedRight, setCheckedRight] = useState(false);
+  const [incomeButtonLeft, setIncomeButtonLeft] = useState(false);
+  const [incomeButtonRight, setIncomeButtonRight] = useState(false);
 
-  const handleLeftButton = () => {
-    setCheckedLeft(!checkedLeft);
-    if (checkedRight) setCheckedRight(false);
+  const handleLeftIncome = () => {
+    setIncomeButtonLeft(!incomeButtonLeft);
+    if (incomeButtonRight) setIncomeButtonRight(false);
   };
-  const handleRightButton = () => {
-    setCheckedRight(!checkedRight);
-    if (checkedLeft) setCheckedLeft(false);
+  const handleRightIncome = () => {
+    setIncomeButtonRight(!incomeButtonRight);
+    if (incomeButtonLeft) setIncomeButtonLeft(false);
   };
 
   const styledButtonLeft = {
-    background: checkedLeft ? "#f27e22" : "#FFFFFF",
-    color: checkedLeft ? "#FFFF" : "#333",
+    background: incomeButtonLeft ? "#f27e22" : "#FFFFFF",
+    color: incomeButtonLeft ? "#FFFF" : "#333",
   };
   const styledButtonRight = {
-    background: checkedRight ? "#f27e22" : "#FFFFFF",
-    color: checkedRight ? "#FFFF" : "#333",
+    background: incomeButtonRight ? "#f27e22" : "#FFFFFF",
+    color: incomeButtonRight ? "#FFFF" : "#333",
   };
 
   useEffect(() => {
-    setCheckedLeft(true);
+    setIncomeButtonLeft(true);
   }, []);
 
   return (
     <Wrapper>
       <Header>
-        <Title>Rendimento</Title>
+        <IncomeTitle>Rendimento</IncomeTitle>
         <InfoOutlinedIcon fontSize="small" />
       </Header>
-      <IncomingType>
-        <LeftButtom onClick={handleLeftButton} style={{ ...styledButtonLeft }}>
-          <Icon>{checkedLeft && <CheckIcon fontSize="small" />}</Icon>
+      <IncomeButtons>
+        <IncomeLeft onClick={handleLeftIncome} style={{ ...styledButtonLeft }}>
+          <Icon>{incomeButtonLeft && <CheckIcon fontSize="small" />}</Icon>
           Bruto
-        </LeftButtom>
+        </IncomeLeft>
 
-        <RightButtom
-          onClick={handleRightButton}
+        <IncomeRight
+          onClick={handleRightIncome}
           style={{ ...styledButtonRight }}
         >
-          {checkedRight && <CheckIcon fontSize="small" />}
+          {incomeButtonRight && <CheckIcon fontSize="small" />}
           Líquido
-        </RightButtom>
-      </IncomingType>
+        </IncomeRight>
+      </IncomeButtons>
     </Wrapper>
   );
 };

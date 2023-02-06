@@ -12,11 +12,11 @@ export const Header = styled.header`
   justify-content: space-between;
 `;
 
-export const Title = styled.h1`
+export const IndexingTitle = styled.h1`
   font-size: 12px;
 `;
 
-export const IndexingType = styled.div`
+export const IndexingButtons = styled.div`
   display: flex;
   width: 100%;
   height: 50px;
@@ -26,7 +26,7 @@ export const IndexingType = styled.div`
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
 `;
 
-export const LeftButtom = styled.button`
+export const IndexingLeft = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@ export const LeftButtom = styled.button`
   cursor: pointer;
 `;
 
-export const CenterButton = styled.button`
+export const IndexingCenter = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +51,7 @@ export const CenterButton = styled.button`
   cursor: pointer;
 `;
 
-export const RightButtom = styled.button`
+export const IndexingRight = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
