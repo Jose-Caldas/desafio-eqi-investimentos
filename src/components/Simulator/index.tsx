@@ -1,4 +1,3 @@
-import { CircularProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { GET_INDICATORS, GET_SIMULATORS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
@@ -8,33 +7,7 @@ import Input from "../Form/Input/Input";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CheckIcon from "@material-ui/icons/Check";
 
-import {
-  Wrapper,
-  Title,
-  Section,
-  Grid,
-  Form,
-  Result,
-  SubTitle,
-  Box,
-  Span,
-  GridCard,
-  SimulateContainer,
-  ResultContainer,
-  IncomeWrapper,
-  Header,
-  IncomeButtons,
-  IncomeLeft,
-  Icon,
-  IncomeRight,
-  IncomeTitle,
-  IndexingTitle,
-  IndexingButtons,
-  IndexingLeft,
-  IndexingCenter,
-  IndexingRight,
-  IndexingWrapper,
-} from "./styles";
+import * as S from "./styles";
 
 import Filter from "./Filter";
 
@@ -143,68 +116,68 @@ const Simulator = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <Title>Simulador de investimentos</Title>
-      <SubTitle>Simulador</SubTitle>
-      <Section>
-        <SimulateContainer>
-          <Grid>
-            <IncomeWrapper>
-              <Header>
-                <IncomeTitle>Rendimento</IncomeTitle>
+    <S.Wrapper>
+      <S.Title>Simulador de investimentos</S.Title>
+      <S.SubTitle>Simulador</S.SubTitle>
+      <S.Section>
+        <S.SimulateContainer>
+          <S.Grid>
+            <S.IncomeWrapper>
+              <S.Header>
+                <S.IncomeTitle>Rendimento</S.IncomeTitle>
                 <InfoOutlinedIcon fontSize="small" />
-              </Header>
-              <IncomeButtons>
-                <IncomeLeft
+              </S.Header>
+              <S.IncomeButtons>
+                <S.IncomeLeft
                   onClick={handleLeftIncome}
                   style={{ ...styledIncomeLeft }}
                 >
-                  <Icon>
+                  <S.Icon>
                     {incomeButtonLeft && <CheckIcon fontSize="small" />}
-                  </Icon>
+                  </S.Icon>
                   Bruto
-                </IncomeLeft>
+                </S.IncomeLeft>
 
-                <IncomeRight
+                <S.IncomeRight
                   onClick={handleRightIncome}
                   style={{ ...styledIncomeRight }}
                 >
                   {incomeButtonRight && <CheckIcon fontSize="small" />}
                   Líquido
-                </IncomeRight>
-              </IncomeButtons>
-            </IncomeWrapper>
-            <IndexingWrapper>
-              <Header>
-                <IndexingTitle>Tipos de indexação</IndexingTitle>
+                </S.IncomeRight>
+              </S.IncomeButtons>
+            </S.IncomeWrapper>
+            <S.IndexingWrapper>
+              <S.Header>
+                <S.IndexingTitle>Tipos de indexação</S.IndexingTitle>
                 <InfoOutlinedIcon fontSize="small" />
-              </Header>
-              <IndexingButtons>
-                <IndexingLeft
+              </S.Header>
+              <S.IndexingButtons>
+                <S.IndexingLeft
                   onClick={handleLeftIndexing}
                   style={{ ...styledButtonLeft }}
                 >
                   {indexingButtonLeft && <CheckIcon fontSize="small" />}
                   PRÉ
-                </IndexingLeft>
-                <IndexingCenter
+                </S.IndexingLeft>
+                <S.IndexingCenter
                   onClick={handleCenterIndexing}
                   style={{ ...styledButtonCenter }}
                 >
                   {indexingButtonCenter && <CheckIcon fontSize="small" />}
                   POS
-                </IndexingCenter>
-                <IndexingRight
+                </S.IndexingCenter>
+                <S.IndexingRight
                   onClick={handleRightIndexing}
                   style={{ ...styledButtonRight }}
                 >
                   {indexingButtonRight && <CheckIcon fontSize="small" />}
                   FIXADO
-                </IndexingRight>
-              </IndexingButtons>
-            </IndexingWrapper>
-          </Grid>
-          <Form>
+                </S.IndexingRight>
+              </S.IndexingButtons>
+            </S.IndexingWrapper>
+          </S.Grid>
+          <S.Form>
             <Input label="Aporte Mensal" name="mensal" {...mensal} />
             <Input
               label="Aporte Anual"
@@ -218,36 +191,37 @@ const Simulator = () => {
               name="rentabilidade"
               {...rentabilidade}
             />
-          </Form>
-          <Grid>
+          </S.Form>
+          <S.Grid>
             {indicators.map(({ nome, valor }) => (
-              <Box key={nome}>
+              <S.Box key={nome}>
                 <p style={{ margin: "2px", fontSize: 12 }}>
-                  <Span>{`${nome}`} </Span>
+                  <S.Span>{`${nome}`} </S.Span>
                   (ao ano)
                 </p>
                 <p>{valor}%</p>
-              </Box>
+              </S.Box>
             ))}
-          </Grid>
-          <Grid>
+          </S.Grid>
+          <S.Grid>
             <Button title="Limpar campos" types="primary" />
             <Button
               title="Simular"
-              isLoading={loading}
+              // isLoading={loading}
               types="secondary"
-              disabled={loading}
+              // disabled={loading}
               onClick={simulate}
             />
-          </Grid>
-        </SimulateContainer>
+          </S.Grid>
+        </S.SimulateContainer>
 
-        <ResultContainer>
-          <Result>
+        <S.ResultContainer>
+          <S.Result>
             <h1 style={{ marginTop: -40, fontSize: 16 }}>
               Resultado da Simulação
             </h1>
-            <GridCard>
+
+            <S.GridCard>
               {incomeButtonLeft && indexingButtonLeft ? (
                 <Filter
                   cards={simulators}
@@ -259,6 +233,7 @@ const Simulator = () => {
                   indexingButtonCenter={indexingButtonCenter}
                   indexingButtonRight={indexingButtonRight}
                   show={incomeButtonLeft && indexingButtonLeft}
+                  isLoading={loading}
                 />
               ) : null}
 
@@ -273,6 +248,7 @@ const Simulator = () => {
                   indexingButtonCenter={indexingButtonCenter}
                   indexingButtonRight={indexingButtonRight}
                   show={incomeButtonLeft && indexingButtonCenter}
+                  isLoading={loading}
                 />
               ) : null}
 
@@ -287,6 +263,7 @@ const Simulator = () => {
                   indexingButtonCenter={indexingButtonCenter}
                   indexingButtonRight={indexingButtonRight}
                   show={incomeButtonLeft && indexingButtonRight}
+                  isLoading={loading}
                 />
               ) : null}
 
@@ -301,6 +278,7 @@ const Simulator = () => {
                   indexingButtonCenter={indexingButtonCenter}
                   indexingButtonRight={indexingButtonRight}
                   show={incomeButtonRight && indexingButtonLeft}
+                  isLoading={loading}
                 />
               ) : null}
 
@@ -315,6 +293,7 @@ const Simulator = () => {
                   indexingButtonCenter={indexingButtonCenter}
                   indexingButtonRight={indexingButtonRight}
                   show={incomeButtonRight && indexingButtonCenter}
+                  isLoading={loading}
                 />
               ) : null}
               {incomeButtonRight && indexingButtonRight ? (
@@ -328,15 +307,16 @@ const Simulator = () => {
                   indexingButtonCenter={indexingButtonCenter}
                   indexingButtonRight={indexingButtonRight}
                   show={incomeButtonRight && indexingButtonRight}
+                  isLoading={loading}
                 />
               ) : null}
-            </GridCard>
+            </S.GridCard>
 
-            <SubTitle>Pojeção de Valores</SubTitle>
-          </Result>
-        </ResultContainer>
-      </Section>
-    </Wrapper>
+            <S.SubTitle>Pojeção de Valores</S.SubTitle>
+          </S.Result>
+        </S.ResultContainer>
+      </S.Section>
+    </S.Wrapper>
   );
 };
 
