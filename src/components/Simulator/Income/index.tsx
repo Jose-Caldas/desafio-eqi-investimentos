@@ -26,11 +26,11 @@ const Income = () => {
   };
 
   const styledButtonLeft = {
-    background: incomeButtonLeft ? "#f27e22" : "#FFFFFF",
+    background: incomeButtonLeft ? "#EA7238" : "#FFFFFF",
     color: incomeButtonLeft ? "#FFFF" : "#333",
   };
   const styledButtonRight = {
-    background: incomeButtonRight ? "#f27e22" : "#FFFFFF",
+    background: incomeButtonRight ? "#EA7238" : "#FFFFFF",
     color: incomeButtonRight ? "#FFFF" : "#333",
   };
 

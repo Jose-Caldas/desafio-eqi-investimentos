@@ -37,15 +37,15 @@ const Indexing = () => {
   };
 
   const styledButtonLeft = {
-    background: indexingButtonLeft ? "#f27e22" : "#FFFFFF",
+    background: indexingButtonLeft ? "#EA7238" : "#FFFFFF",
     color: indexingButtonLeft ? "#FFFF" : "#333",
   };
   const styledButtonRight = {
-    background: indexingButtonRight ? "#f27e22" : "#FFFFFF",
+    background: indexingButtonRight ? "#EA7238" : "#FFFFFF",
     color: indexingButtonRight ? "#FFFF" : "#333",
   };
   const styledButtonCenter = {
-    background: indexingButtonCenter ? "#f27e22" : "#FFFFFF",
+    background: indexingButtonCenter ? "#EA7238" : "#FFFFFF",
     color: indexingButtonCenter ? "#FFFF" : "#333",
   };
 

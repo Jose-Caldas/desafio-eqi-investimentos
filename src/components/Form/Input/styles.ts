@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 
   &:hover,
   :focus {
-    border-bottom: 1px solid #f27e22;
+    border-bottom: 1px solid #ea7238;
   }
 
   position: relative;

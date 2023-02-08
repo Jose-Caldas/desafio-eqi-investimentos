@@ -18,8 +18,6 @@ import {
   SubTitle,
   Box,
   Span,
-  Card,
-  Text,
   GridCard,
   SimulateContainer,
   ResultContainer,
@@ -37,6 +35,8 @@ import {
   IndexingRight,
   IndexingWrapper,
 } from "./styles";
+import { Card } from "./Card";
+import { cardTitles } from "./Card/card.data";
 
 const Simulator = () => {
   // API
@@ -72,6 +72,51 @@ const Simulator = () => {
     if (response) setCards(data);
   }
 
+  // Cards da Simulação
+
+  const cardList = cards ? Object.values(cards) : [];
+
+  const getCard1 = cardList.filter(
+    ({ tipoIndexacao, tipoRendimento }) =>
+      tipoRendimento === "bruto" && tipoIndexacao === "pre"
+  );
+
+  const getCard2 = cardList.filter(
+    ({ tipoIndexacao, tipoRendimento }) =>
+      tipoRendimento === "bruto" && tipoIndexacao === "pos"
+  );
+
+  const getCard3 = cardList.filter(
+    ({ tipoIndexacao, tipoRendimento }) =>
+      tipoRendimento === "bruto" && tipoIndexacao === "ipca"
+  );
+
+  const getCard4 = cardList.filter(
+    ({ tipoIndexacao, tipoRendimento }) =>
+      tipoRendimento === "liquido" && tipoIndexacao === "pre"
+  );
+
+  const getCard5 = cardList.filter(
+    ({ tipoIndexacao, tipoRendimento }) =>
+      tipoRendimento === "liquido" && tipoIndexacao === "pos"
+  );
+
+  const getCard6 = cardList.filter(
+    ({ tipoIndexacao, tipoRendimento }) =>
+      tipoRendimento === "liquido" && tipoIndexacao === "ipca"
+  );
+
+  const simulate = () => {
+    getCards();
+  };
+
+  const show1 = incomeButtonLeft && indexingButtonLeft;
+  const show2 = incomeButtonLeft && indexingButtonCenter;
+  const show3 = incomeButtonLeft && indexingButtonRight;
+  const show4 = incomeButtonRight && indexingButtonLeft;
+  const show5 = incomeButtonRight && indexingButtonCenter;
+  const show6 = incomeButtonRight && indexingButtonRight;
+
   useEffect(() => {
     getIndicators();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,11 +133,11 @@ const Simulator = () => {
   };
 
   const styledIncomeLeft = {
-    background: incomeButtonLeft ? "#f27e22" : "#FFFFFF",
+    background: incomeButtonLeft ? "#EA7238" : "#FFFFFF",
     color: incomeButtonLeft ? "#FFFF" : "#333",
   };
   const styledIncomeRight = {
-    background: incomeButtonRight ? "#f27e22" : "#FFFFFF",
+    background: incomeButtonRight ? "#EA7238" : "#FFFFFF",
     color: incomeButtonRight ? "#FFFF" : "#333",
   };
 
@@ -121,15 +166,15 @@ const Simulator = () => {
   };
 
   const styledButtonLeft = {
-    background: indexingButtonLeft ? "#f27e22" : "#FFFFFF",
+    background: indexingButtonLeft ? "#EA7238" : "#FFFFFF",
     color: indexingButtonLeft ? "#FFFF" : "#333",
   };
   const styledButtonRight = {
-    background: indexingButtonRight ? "#f27e22" : "#FFFFFF",
+    background: indexingButtonRight ? "#EA7238" : "#FFFFFF",
     color: indexingButtonRight ? "#FFFF" : "#333",
   };
   const styledButtonCenter = {
-    background: indexingButtonCenter ? "#f27e22" : "#FFFFFF",
+    background: indexingButtonCenter ? "#EA7238" : "#FFFFFF",
     color: indexingButtonCenter ? "#FFFF" : "#333",
   };
 
@@ -194,7 +239,7 @@ const Simulator = () => {
                   style={{ ...styledButtonRight }}
                 >
                   {indexingButtonRight && <CheckIcon fontSize="small" />}
-                  Fixado
+                  FIXADO
                 </IndexingRight>
               </IndexingButtons>
             </IndexingWrapper>
@@ -237,6 +282,7 @@ const Simulator = () => {
               isLoading={isLoading}
               types="secondary"
               disabled={isLoading}
+              onClick={simulate}
             />
           </Grid>
         </SimulateContainer>
@@ -247,19 +293,199 @@ const Simulator = () => {
               Resultado da Simulação
             </h1>
             <GridCard>
-              {cards.map(({ valorFinalBruto }) =>
-                loading ? (
-                  <CircularProgress size={15} color="inherit" />
-                ) : (
-                  <Card>
-                    <Text>Valor Final Bruto</Text>
-                    <p>{valorFinalBruto}</p>
-                  </Card>
-                )
-              )}
+              {show1 &&
+                getCard1.map(({ valorFinalBruto }) => (
+                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
+                ))}
+              {show2 &&
+                getCard2.map(({ valorFinalBruto }) => (
+                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
+                ))}
+              {show3 &&
+                getCard3.map(({ valorFinalBruto }) => (
+                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
+                ))}
+
+              {show1 &&
+                getCard1.map(({ aliquotaIR }) => (
+                  <Card title="Alíquota do IR" value={aliquotaIR} />
+                ))}
+              {show2 &&
+                getCard2.map(({ aliquotaIR }) => (
+                  <Card title="Alíquota do IR" value={aliquotaIR} />
+                ))}
+              {show3 &&
+                getCard3.map(({ aliquotaIR }) => (
+                  <Card title="Alíquota do IR" value={aliquotaIR} />
+                ))}
+
+              {show1 &&
+                getCard1.map(({ valorPagoIR }) => (
+                  <Card title="Valor Pago em IR" value={valorPagoIR} />
+                ))}
+              {show2 &&
+                getCard2.map(({ valorPagoIR }) => (
+                  <Card title="Valor Pago em IR" value={valorPagoIR} />
+                ))}
+              {show3 &&
+                getCard3.map(({ valorPagoIR }) => (
+                  <Card title="Valor Pago em IR" value={valorPagoIR} />
+                ))}
+
+              {show1 &&
+                getCard1.map(({ valorTotalInvestido }) => (
+                  <Card
+                    title="Valor Final Líquido"
+                    value={valorTotalInvestido}
+                  />
+                ))}
+              {show2 &&
+                getCard2.map(({ valorTotalInvestido }) => (
+                  <Card
+                    title="Valor Final Líquido"
+                    value={valorTotalInvestido}
+                  />
+                ))}
+              {show3 &&
+                getCard3.map(({ valorTotalInvestido }) => (
+                  <Card
+                    title="Valor Final Líquido"
+                    value={valorTotalInvestido}
+                  />
+                ))}
+
+              {show1 &&
+                getCard1.map(({ valorFinalLiquido }) => (
+                  <Card
+                    title="Valor Total Investido"
+                    value={valorFinalLiquido}
+                  />
+                ))}
+              {show2 &&
+                getCard2.map(({ valorFinalLiquido }) => (
+                  <Card
+                    title="Valor Total Investido"
+                    value={valorFinalLiquido}
+                  />
+                ))}
+              {show3 &&
+                getCard3.map(({ valorFinalLiquido }) => (
+                  <Card
+                    title="Valor Total Investido"
+                    value={valorFinalLiquido}
+                  />
+                ))}
+
+              {show1 &&
+                getCard1.map(({ ganhoLiquido }) => (
+                  <Card title="Ganho Líquido" value={ganhoLiquido} />
+                ))}
+              {show2 &&
+                getCard2.map(({ ganhoLiquido }) => (
+                  <Card title="Ganho Líquido" value={ganhoLiquido} />
+                ))}
+              {show3 &&
+                getCard3.map(({ ganhoLiquido }) => (
+                  <Card title="Ganho Líquido" value={ganhoLiquido} />
+                ))}
+
+              {show4 &&
+                getCard4.map(({ valorFinalBruto }) => (
+                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
+                ))}
+              {show5 &&
+                getCard5.map(({ valorFinalBruto }) => (
+                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
+                ))}
+              {show6 &&
+                getCard6.map(({ valorFinalBruto }) => (
+                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
+                ))}
+
+              {show4 &&
+                getCard4.map(({ aliquotaIR }) => (
+                  <Card title="Alíquota do IR" value={aliquotaIR} />
+                ))}
+              {show5 &&
+                getCard5.map(({ aliquotaIR }) => (
+                  <Card title="Alíquota do IR" value={aliquotaIR} />
+                ))}
+              {show6 &&
+                getCard6.map(({ aliquotaIR }) => (
+                  <Card title="Alíquota do IR" value={aliquotaIR} />
+                ))}
+
+              {show4 &&
+                getCard4.map(({ valorPagoIR }) => (
+                  <Card title="Valor Pago em IR" value={valorPagoIR} />
+                ))}
+              {show5 &&
+                getCard5.map(({ valorPagoIR }) => (
+                  <Card title="Valor Pago em IR" value={valorPagoIR} />
+                ))}
+              {show6 &&
+                getCard6.map(({ valorPagoIR }) => (
+                  <Card title="Valor Pago em IR" value={valorPagoIR} />
+                ))}
+
+              {show4 &&
+                getCard4.map(({ valorTotalInvestido }) => (
+                  <Card
+                    title="Valor Final Líquido"
+                    value={valorTotalInvestido}
+                  />
+                ))}
+              {show5 &&
+                getCard5.map(({ valorTotalInvestido }) => (
+                  <Card
+                    title="Valor Final Líquido"
+                    value={valorTotalInvestido}
+                  />
+                ))}
+              {show6 &&
+                getCard6.map(({ valorTotalInvestido }) => (
+                  <Card
+                    title="Valor Final Líquido"
+                    value={valorTotalInvestido}
+                  />
+                ))}
+
+              {show4 &&
+                getCard4.map(({ valorFinalLiquido }) => (
+                  <Card
+                    title="Valor Total Investido"
+                    value={valorFinalLiquido}
+                  />
+                ))}
+              {show5 &&
+                getCard5.map(({ valorFinalLiquido }) => (
+                  <Card
+                    title="Valor Total Investido"
+                    value={valorFinalLiquido}
+                  />
+                ))}
+              {show6 &&
+                getCard6.map(({ valorFinalLiquido }) => (
+                  <Card
+                    title="Valor Total Investido"
+                    value={valorFinalLiquido}
+                  />
+                ))}
+
+              {show4 &&
+                getCard4.map(({ ganhoLiquido }) => (
+                  <Card title="Ganho Líquido" value={ganhoLiquido} />
+                ))}
+              {show5 &&
+                getCard5.map(({ ganhoLiquido }) => (
+                  <Card title="Ganho Líquido" value={ganhoLiquido} />
+                ))}
+              {show6 &&
+                getCard6.map(({ ganhoLiquido }) => (
+                  <Card title="Ganho Líquido" value={ganhoLiquido} />
+                ))}
             </GridCard>
 
-            <button onClick={getCards}>Simular</button>
             <SubTitle>Pojeção de Valores</SubTitle>
           </Result>
         </ResultContainer>

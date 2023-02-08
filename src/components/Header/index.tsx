@@ -1,32 +1,38 @@
-import {
-  Wrapper,
-  Title,
-  Menu,
-  IconWrapper,
-  InputCenter,
-  SearchWrapper,
-  Search,
-  InputRight,
-} from "./styles";
+import * as S from "./styles";
 
 import SearchOutlinedIcon from "@material-ui/icons/Search";
-import { iconsHeader } from "./IconsHeader";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import CloseIcon from "@material-ui/icons/Close";
+import ForwardOutlinedIcon from "@material-ui/icons/ForwardOutlined";
 
 const Header = () => {
   return (
-    <Wrapper>
-      <Title>Calculadora de investimentos</Title>
-      <Menu>
-        <IconWrapper>{iconsHeader.map((icon) => icon)}</IconWrapper>
-        <InputCenter />
-        <SearchWrapper>
-          <Search>
+    <S.Wrapper>
+      <S.Title>Calculadora de investimentos</S.Title>
+      <S.Menu>
+        <S.IconWrapper>
+          <S.Icon>
+            <ForwardOutlinedIcon />
+          </S.Icon>
+          <S.Icon>
+            <ForwardOutlinedIcon />
+          </S.Icon>
+          <S.Icon>
+            <CloseIcon />
+          </S.Icon>
+          <S.Icon>
+            <HomeOutlinedIcon />
+          </S.Icon>
+        </S.IconWrapper>
+        <S.InputCenter />
+        <S.SearchWrapper>
+          <S.Search>
             <SearchOutlinedIcon />
-          </Search>
-          <InputRight />
-        </SearchWrapper>
-      </Menu>
-    </Wrapper>
+          </S.Search>
+          <S.InputRight />
+        </S.SearchWrapper>
+      </S.Menu>
+    </S.Wrapper>
   );
 };
 

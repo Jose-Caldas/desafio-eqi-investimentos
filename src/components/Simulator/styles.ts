@@ -54,7 +54,7 @@ export const SimulateContainer = styled.div``;
 export const GridCard = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 30px;
+  gap: 50px;
   padding: 20px 0;
   width: 100%;
 `;

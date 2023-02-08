@@ -31,7 +31,7 @@ export const buttonPrimary: ButtonVariant = {
 export const buttonSecondary: ButtonVariant = {
   enabled: {
     button: {
-      backgroundColor: "#f27e22",
+      backgroundColor: "#EA7238",
       border: "none",
       borderColor: "none",
     },
