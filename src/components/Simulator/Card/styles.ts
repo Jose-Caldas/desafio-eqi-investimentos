@@ -18,10 +18,19 @@ export const Wrapper = styled.section`
       color: #08a85f;
     }
   }
+  &:nth-child(2) {
+    p {
+      &:after {
+        content: "%";
+      }
+    }
+  }
 `;
 
 export const Title = styled.h1`
-  font-size: 12px;
+  font-size: 14px;
 `;
 
-export const Value = styled.p``;
+export const Value = styled.p`
+  font-weight: 500;
+`;

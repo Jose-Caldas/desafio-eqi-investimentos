@@ -35,15 +35,14 @@ import {
   IndexingRight,
   IndexingWrapper,
 } from "./styles";
-import { Card } from "./Card";
-import { cardTitles } from "./Card/card.data";
+
+import Filter from "./Filter";
 
 const Simulator = () => {
   // API
-  const [cards, setCards] = useState([]);
+  const [simulators, setSimulators] = useState([]);
   const [indicators, setIndicators] = useState([]);
   const { loading, request } = useFetch();
-  const [isLoading, setIsLoading] = useState(false);
 
   // FORM
   const mensal = useForm();
@@ -69,53 +68,14 @@ const Simulator = () => {
     const { url, options } = GET_SIMULATORS();
 
     const { response, data } = await request(url, options);
-    if (response) setCards(data);
+    if (response) setSimulators(data);
   }
 
   // Cards da Simulação
 
-  const cardList = cards ? Object.values(cards) : [];
-
-  const getCard1 = cardList.filter(
-    ({ tipoIndexacao, tipoRendimento }) =>
-      tipoRendimento === "bruto" && tipoIndexacao === "pre"
-  );
-
-  const getCard2 = cardList.filter(
-    ({ tipoIndexacao, tipoRendimento }) =>
-      tipoRendimento === "bruto" && tipoIndexacao === "pos"
-  );
-
-  const getCard3 = cardList.filter(
-    ({ tipoIndexacao, tipoRendimento }) =>
-      tipoRendimento === "bruto" && tipoIndexacao === "ipca"
-  );
-
-  const getCard4 = cardList.filter(
-    ({ tipoIndexacao, tipoRendimento }) =>
-      tipoRendimento === "liquido" && tipoIndexacao === "pre"
-  );
-
-  const getCard5 = cardList.filter(
-    ({ tipoIndexacao, tipoRendimento }) =>
-      tipoRendimento === "liquido" && tipoIndexacao === "pos"
-  );
-
-  const getCard6 = cardList.filter(
-    ({ tipoIndexacao, tipoRendimento }) =>
-      tipoRendimento === "liquido" && tipoIndexacao === "ipca"
-  );
-
   const simulate = () => {
     getCards();
   };
-
-  const show1 = incomeButtonLeft && indexingButtonLeft;
-  const show2 = incomeButtonLeft && indexingButtonCenter;
-  const show3 = incomeButtonLeft && indexingButtonRight;
-  const show4 = incomeButtonRight && indexingButtonLeft;
-  const show5 = incomeButtonRight && indexingButtonCenter;
-  const show6 = incomeButtonRight && indexingButtonRight;
 
   useEffect(() => {
     getIndicators();
@@ -261,7 +221,7 @@ const Simulator = () => {
           </Form>
           <Grid>
             {indicators.map(({ nome, valor }) => (
-              <Box>
+              <Box key={nome}>
                 <p style={{ margin: "2px", fontSize: 12 }}>
                   <Span>{`${nome}`} </Span>
                   (ao ano)
@@ -271,17 +231,12 @@ const Simulator = () => {
             ))}
           </Grid>
           <Grid>
-            <Button
-              title="Limpar campos"
-              isLoading={isLoading}
-              types="primary"
-              disabled={isLoading}
-            />
+            <Button title="Limpar campos" types="primary" />
             <Button
               title="Simular"
-              isLoading={isLoading}
+              isLoading={loading}
               types="secondary"
-              disabled={isLoading}
+              disabled={loading}
               onClick={simulate}
             />
           </Grid>
@@ -293,197 +248,88 @@ const Simulator = () => {
               Resultado da Simulação
             </h1>
             <GridCard>
-              {show1 &&
-                getCard1.map(({ valorFinalBruto }) => (
-                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
-                ))}
-              {show2 &&
-                getCard2.map(({ valorFinalBruto }) => (
-                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
-                ))}
-              {show3 &&
-                getCard3.map(({ valorFinalBruto }) => (
-                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
-                ))}
+              {incomeButtonLeft && indexingButtonLeft ? (
+                <Filter
+                  cards={simulators}
+                  typeIndex="pre"
+                  typeRend="bruto"
+                  incomeButtonLeft={incomeButtonLeft}
+                  incomeButtonRight={incomeButtonRight}
+                  indexingButtonLeft={indexingButtonLeft}
+                  indexingButtonCenter={indexingButtonCenter}
+                  indexingButtonRight={indexingButtonRight}
+                  show={incomeButtonLeft && indexingButtonLeft}
+                />
+              ) : null}
 
-              {show1 &&
-                getCard1.map(({ aliquotaIR }) => (
-                  <Card title="Alíquota do IR" value={aliquotaIR} />
-                ))}
-              {show2 &&
-                getCard2.map(({ aliquotaIR }) => (
-                  <Card title="Alíquota do IR" value={aliquotaIR} />
-                ))}
-              {show3 &&
-                getCard3.map(({ aliquotaIR }) => (
-                  <Card title="Alíquota do IR" value={aliquotaIR} />
-                ))}
+              {incomeButtonLeft && indexingButtonCenter ? (
+                <Filter
+                  cards={simulators}
+                  typeIndex="pos"
+                  typeRend="bruto"
+                  incomeButtonLeft={incomeButtonLeft}
+                  incomeButtonRight={incomeButtonRight}
+                  indexingButtonLeft={indexingButtonLeft}
+                  indexingButtonCenter={indexingButtonCenter}
+                  indexingButtonRight={indexingButtonRight}
+                  show={incomeButtonLeft && indexingButtonCenter}
+                />
+              ) : null}
 
-              {show1 &&
-                getCard1.map(({ valorPagoIR }) => (
-                  <Card title="Valor Pago em IR" value={valorPagoIR} />
-                ))}
-              {show2 &&
-                getCard2.map(({ valorPagoIR }) => (
-                  <Card title="Valor Pago em IR" value={valorPagoIR} />
-                ))}
-              {show3 &&
-                getCard3.map(({ valorPagoIR }) => (
-                  <Card title="Valor Pago em IR" value={valorPagoIR} />
-                ))}
+              {incomeButtonLeft && indexingButtonRight ? (
+                <Filter
+                  cards={simulators}
+                  typeIndex="ipca"
+                  typeRend="bruto"
+                  incomeButtonLeft={incomeButtonLeft}
+                  incomeButtonRight={incomeButtonRight}
+                  indexingButtonLeft={indexingButtonLeft}
+                  indexingButtonCenter={indexingButtonCenter}
+                  indexingButtonRight={indexingButtonRight}
+                  show={incomeButtonLeft && indexingButtonRight}
+                />
+              ) : null}
 
-              {show1 &&
-                getCard1.map(({ valorTotalInvestido }) => (
-                  <Card
-                    title="Valor Final Líquido"
-                    value={valorTotalInvestido}
-                  />
-                ))}
-              {show2 &&
-                getCard2.map(({ valorTotalInvestido }) => (
-                  <Card
-                    title="Valor Final Líquido"
-                    value={valorTotalInvestido}
-                  />
-                ))}
-              {show3 &&
-                getCard3.map(({ valorTotalInvestido }) => (
-                  <Card
-                    title="Valor Final Líquido"
-                    value={valorTotalInvestido}
-                  />
-                ))}
+              {incomeButtonRight && indexingButtonLeft ? (
+                <Filter
+                  cards={simulators}
+                  typeIndex="pre"
+                  typeRend="liquido"
+                  incomeButtonLeft={incomeButtonLeft}
+                  incomeButtonRight={incomeButtonRight}
+                  indexingButtonLeft={indexingButtonLeft}
+                  indexingButtonCenter={indexingButtonCenter}
+                  indexingButtonRight={indexingButtonRight}
+                  show={incomeButtonRight && indexingButtonLeft}
+                />
+              ) : null}
 
-              {show1 &&
-                getCard1.map(({ valorFinalLiquido }) => (
-                  <Card
-                    title="Valor Total Investido"
-                    value={valorFinalLiquido}
-                  />
-                ))}
-              {show2 &&
-                getCard2.map(({ valorFinalLiquido }) => (
-                  <Card
-                    title="Valor Total Investido"
-                    value={valorFinalLiquido}
-                  />
-                ))}
-              {show3 &&
-                getCard3.map(({ valorFinalLiquido }) => (
-                  <Card
-                    title="Valor Total Investido"
-                    value={valorFinalLiquido}
-                  />
-                ))}
-
-              {show1 &&
-                getCard1.map(({ ganhoLiquido }) => (
-                  <Card title="Ganho Líquido" value={ganhoLiquido} />
-                ))}
-              {show2 &&
-                getCard2.map(({ ganhoLiquido }) => (
-                  <Card title="Ganho Líquido" value={ganhoLiquido} />
-                ))}
-              {show3 &&
-                getCard3.map(({ ganhoLiquido }) => (
-                  <Card title="Ganho Líquido" value={ganhoLiquido} />
-                ))}
-
-              {show4 &&
-                getCard4.map(({ valorFinalBruto }) => (
-                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
-                ))}
-              {show5 &&
-                getCard5.map(({ valorFinalBruto }) => (
-                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
-                ))}
-              {show6 &&
-                getCard6.map(({ valorFinalBruto }) => (
-                  <Card title="Valor Final Bruto" value={valorFinalBruto} />
-                ))}
-
-              {show4 &&
-                getCard4.map(({ aliquotaIR }) => (
-                  <Card title="Alíquota do IR" value={aliquotaIR} />
-                ))}
-              {show5 &&
-                getCard5.map(({ aliquotaIR }) => (
-                  <Card title="Alíquota do IR" value={aliquotaIR} />
-                ))}
-              {show6 &&
-                getCard6.map(({ aliquotaIR }) => (
-                  <Card title="Alíquota do IR" value={aliquotaIR} />
-                ))}
-
-              {show4 &&
-                getCard4.map(({ valorPagoIR }) => (
-                  <Card title="Valor Pago em IR" value={valorPagoIR} />
-                ))}
-              {show5 &&
-                getCard5.map(({ valorPagoIR }) => (
-                  <Card title="Valor Pago em IR" value={valorPagoIR} />
-                ))}
-              {show6 &&
-                getCard6.map(({ valorPagoIR }) => (
-                  <Card title="Valor Pago em IR" value={valorPagoIR} />
-                ))}
-
-              {show4 &&
-                getCard4.map(({ valorTotalInvestido }) => (
-                  <Card
-                    title="Valor Final Líquido"
-                    value={valorTotalInvestido}
-                  />
-                ))}
-              {show5 &&
-                getCard5.map(({ valorTotalInvestido }) => (
-                  <Card
-                    title="Valor Final Líquido"
-                    value={valorTotalInvestido}
-                  />
-                ))}
-              {show6 &&
-                getCard6.map(({ valorTotalInvestido }) => (
-                  <Card
-                    title="Valor Final Líquido"
-                    value={valorTotalInvestido}
-                  />
-                ))}
-
-              {show4 &&
-                getCard4.map(({ valorFinalLiquido }) => (
-                  <Card
-                    title="Valor Total Investido"
-                    value={valorFinalLiquido}
-                  />
-                ))}
-              {show5 &&
-                getCard5.map(({ valorFinalLiquido }) => (
-                  <Card
-                    title="Valor Total Investido"
-                    value={valorFinalLiquido}
-                  />
-                ))}
-              {show6 &&
-                getCard6.map(({ valorFinalLiquido }) => (
-                  <Card
-                    title="Valor Total Investido"
-                    value={valorFinalLiquido}
-                  />
-                ))}
-
-              {show4 &&
-                getCard4.map(({ ganhoLiquido }) => (
-                  <Card title="Ganho Líquido" value={ganhoLiquido} />
-                ))}
-              {show5 &&
-                getCard5.map(({ ganhoLiquido }) => (
-                  <Card title="Ganho Líquido" value={ganhoLiquido} />
-                ))}
-              {show6 &&
-                getCard6.map(({ ganhoLiquido }) => (
-                  <Card title="Ganho Líquido" value={ganhoLiquido} />
-                ))}
+              {incomeButtonRight && indexingButtonCenter ? (
+                <Filter
+                  cards={simulators}
+                  typeIndex="pos"
+                  typeRend="liquido"
+                  incomeButtonLeft={incomeButtonLeft}
+                  incomeButtonRight={incomeButtonRight}
+                  indexingButtonLeft={indexingButtonLeft}
+                  indexingButtonCenter={indexingButtonCenter}
+                  indexingButtonRight={indexingButtonRight}
+                  show={incomeButtonRight && indexingButtonCenter}
+                />
+              ) : null}
+              {incomeButtonRight && indexingButtonRight ? (
+                <Filter
+                  cards={simulators}
+                  typeIndex="ipca"
+                  typeRend="liquido"
+                  incomeButtonLeft={incomeButtonLeft}
+                  incomeButtonRight={incomeButtonRight}
+                  indexingButtonLeft={indexingButtonLeft}
+                  indexingButtonCenter={indexingButtonCenter}
+                  indexingButtonRight={indexingButtonRight}
+                  show={incomeButtonRight && indexingButtonRight}
+                />
+              ) : null}
             </GridCard>
 
             <SubTitle>Pojeção de Valores</SubTitle>
