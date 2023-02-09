@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   position: relative;
   p {
     position: absolute;
-    top: 70px;
+    top: 55px;
     color: #f62e36;
     margin: 0;
     font-size: 12px;
@@ -22,7 +22,6 @@ export const Wrapper = styled.div`
 
 export const CustomInput = styled.input`
   border: none;
-  padding: 16px 0;
   outline: none;
   background-color: transparent;
   font-size: 16px;
@@ -30,4 +29,5 @@ export const CustomInput = styled.input`
 
 export const Label = styled.label`
   font-size: 12px;
+  margin-bottom: 20px;
 `;

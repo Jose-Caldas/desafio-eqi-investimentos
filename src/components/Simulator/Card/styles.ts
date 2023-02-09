@@ -3,10 +3,13 @@ import styled from "styled-components";
 export const Wrapper = styled.section`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-direction: column;
   background-color: #eee;
   border-radius: 2px;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.25);
+  height: 110px;
+  padding: 16px 0;
 
   &:nth-child(6) {
     p {

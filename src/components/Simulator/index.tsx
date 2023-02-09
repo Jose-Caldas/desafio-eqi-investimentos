@@ -195,11 +195,11 @@ const Simulator = () => {
           <S.Grid>
             {indicators.map(({ nome, valor }) => (
               <S.Box key={nome}>
-                <p style={{ margin: "2px", fontSize: 12 }}>
+                <p>
                   <S.Span>{`${nome}`} </S.Span>
                   (ao ano)
                 </p>
-                <p>{valor}%</p>
+                <h2>{valor}%</h2>
               </S.Box>
             ))}
           </S.Grid>

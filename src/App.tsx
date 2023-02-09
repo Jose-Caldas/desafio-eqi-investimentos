@@ -1,11 +1,15 @@
-import React from "react";
-import { Container } from "./components/Container";
+import Header from "./components/Header";
+import Simulator from "./components/Simulator";
+import { Container } from "./style";
 
 function App() {
   return (
-    <div className="App">
-      <Container />
-    </div>
+    <>
+      <Header />
+      <Container>
+        <Simulator />
+      </Container>
+    </>
   );
 }
 

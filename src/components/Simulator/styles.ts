@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.section`
-  width: 70%;
-  background-color: #ddd;
-  margin-top: 40px;
-  padding: 30px;
-`;
+export const Wrapper = styled.section``;
 
 export const Title = styled.h1`
   text-align: center;
@@ -61,7 +56,16 @@ export const GridCard = styled.div`
 
 export const Box = styled.div`
   border-bottom: 1px solid #333;
-  margin: 20px 0 30px 0;
+  margin: 30px 0;
+
+  p {
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  h2 {
+    font-size: 16px;
+    font-weight: 500;
+  }
 `;
 
 export const Span = styled.span`
@@ -106,6 +110,7 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 16px;
 `;
 
 export const IncomeTitle = styled.h1`
@@ -183,7 +188,6 @@ export const IndexingLeft = styled.button`
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   position: relative;
-  box-sizing: border-box;
 
   cursor: pointer;
 `;
@@ -207,6 +211,5 @@ export const IndexingRight = styled.button`
   border: none;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  box-sizing: border-box;
   cursor: pointer;
 `;
