@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { GET_INDICATORS, GET_SIMULATORS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
 import useForm from "../../Hooks/useForm";
@@ -37,6 +37,7 @@ const Simulator = () => {
     const { response, data } = await request(url, options);
     if (response) setIndicators(data);
   }
+
   async function getCards() {
     const { url, options } = GET_SIMULATORS();
 
@@ -111,6 +112,11 @@ const Simulator = () => {
     color: indexingButtonCenter ? "#FFFF" : "#333",
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    getCards();
+  };
+
   useEffect(() => {
     setIndexingButtonCenter(true);
   }, []);
@@ -177,7 +183,7 @@ const Simulator = () => {
               </S.IndexingButtons>
             </S.IndexingWrapper>
           </S.Grid>
-          <S.Form>
+          <S.Form onSubmit={(e) => handleSubmit(e)}>
             <Input label="Aporte Mensal" name="mensal" {...mensal} />
             <Input
               label="Aporte Anual"
@@ -191,8 +197,7 @@ const Simulator = () => {
               name="rentabilidade"
               {...rentabilidade}
             />
-          </S.Form>
-          <S.Grid>
+
             {indicators.map(({ nome, valor }) => (
               <S.Box key={nome}>
                 <p>
@@ -202,8 +207,7 @@ const Simulator = () => {
                 <h2>{valor}%</h2>
               </S.Box>
             ))}
-          </S.Grid>
-          <S.Grid>
+
             <Button title="Limpar campos" types="primary" />
             <Button
               title="Simular"
@@ -211,8 +215,9 @@ const Simulator = () => {
               types="secondary"
               // disabled={loading}
               onClick={simulate}
+              type="submit"
             />
-          </S.Grid>
+          </S.Form>
         </S.SimulateContainer>
 
         <S.ResultContainer>

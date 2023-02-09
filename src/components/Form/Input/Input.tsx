@@ -1,4 +1,4 @@
-import { Wrapper, CustomInput, Label } from "./styles";
+import * as S from "./styles";
 
 type InputProps = {
   label: string;
@@ -10,11 +10,11 @@ type InputProps = {
 
 const Input = ({ label, value, name, onChange, error }: InputProps) => {
   return (
-    <Wrapper>
-      <Label htmlFor={name}>{label}</Label>
-      <CustomInput id={name} name={name} value={value} onChange={onChange} />
+    <S.Wrapper>
+      <S.Label htmlFor={name}>{label}</S.Label>
+      <S.CustomInput id={name} name={name} value={value} onChange={onChange} />
       {error && <p>{error}</p>}
-    </Wrapper>
+    </S.Wrapper>
   );
 };
 

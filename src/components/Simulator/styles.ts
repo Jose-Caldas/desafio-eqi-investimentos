@@ -56,7 +56,6 @@ export const GridCard = styled.div`
 
 export const Box = styled.div`
   border-bottom: 1px solid #333;
-  margin: 30px 0;
 
   p {
     margin-bottom: 20px;
