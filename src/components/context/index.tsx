@@ -5,7 +5,7 @@ export const INITIAL_STATE = {
   incomeButtonRight: false,
   indexingButtonLeft: false,
   indexingButtonRight: false,
-  indexingButtonCenter: false,
+  indexingButtonCenter: true,
 };
 
 export type InitialStateType = typeof INITIAL_STATE;

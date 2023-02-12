@@ -2,15 +2,13 @@ import { FormEvent, useEffect, useState } from "react";
 import { GET_INDICATORS, GET_SIMULATORS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
 import useForm from "../../Hooks/useForm";
-import Button from "../Button";
-import Input from "../Form/Input/Input";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CheckIcon from "@material-ui/icons/Check";
-
 import * as S from "./styles";
-
 import Filter from "./Filter";
 import { useAppContext } from "../context/hook";
+import Input from "../Form/Input";
+import Button from "../Form/Button";
 
 const Simulator = () => {
   // API
@@ -115,10 +113,6 @@ const Simulator = () => {
     e.preventDefault();
     getSimulators();
   };
-
-  useEffect(() => {
-    setIndexingButtonCenter(true);
-  }, []);
 
   return (
     <S.Wrapper>

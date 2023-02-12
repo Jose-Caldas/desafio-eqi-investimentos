@@ -1,10 +1,14 @@
 import { InitialStateType, INITIAL_STATE } from ".";
 import { AppContextActions } from "../../enums/AppContextActions";
-import { IDispatchAction } from "./interfaces/IDispatchAction";
+
+type DispatchActionProps = {
+  type: AppContextActions;
+  payload?: any;
+};
 
 export const appContextReducer = (
   state = INITIAL_STATE,
-  action: IDispatchAction
+  action: DispatchActionProps
 ): InitialStateType => {
   switch (action.type) {
     case AppContextActions.SetIncomeButtonLeft:
