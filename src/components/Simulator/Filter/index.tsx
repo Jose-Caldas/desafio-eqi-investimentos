@@ -5,8 +5,8 @@ import { Card } from "../Card";
 
 interface FilterProps {
   cards: object;
-  typeIndex: string;
-  typeRend: string;
+  typeIndexing: string;
+  typeIncome: string;
   incomeButtonLeft: boolean;
   indexingButtonLeft: boolean;
   indexingButtonCenter: boolean;
@@ -18,8 +18,8 @@ interface FilterProps {
 
 const Filter = ({
   cards,
-  typeIndex,
-  typeRend,
+  typeIndexing,
+  typeIncome,
   show,
   isLoading,
 }: FilterProps) => {
@@ -27,7 +27,7 @@ const Filter = ({
 
   const getCard = cardList.filter(
     ({ tipoIndexacao, tipoRendimento }) =>
-      tipoIndexacao === typeIndex && tipoRendimento === typeRend
+      tipoIndexacao === typeIndexing && tipoRendimento === typeIncome
   );
 
   return (

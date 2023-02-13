@@ -9,11 +9,13 @@ import Filter from "./Filter";
 import { useAppContext } from "../context/hook";
 import Input from "../Form/Input";
 import Button from "../Form/Button";
+import { ISimulators } from "../../interfaces/ISimulators";
+import { IIndicators } from "../../interfaces/IIndicators";
 
 const Simulator = () => {
   // API
-  const [simulators, setSimulators] = useState([]);
-  const [indicators, setIndicators] = useState([]);
+  const [simulators, setSimulators] = useState<ISimulators[]>([]);
+  const [indicators, setIndicators] = useState<IIndicators[]>([]);
   const { loading, request } = useFetch();
 
   // FORM
@@ -223,8 +225,8 @@ const Simulator = () => {
               {state.incomeButtonLeft && state.indexingButtonLeft ? (
                 <Filter
                   cards={simulators}
-                  typeIndex="pre"
-                  typeRend="bruto"
+                  typeIndexing="pre"
+                  typeIncome="bruto"
                   incomeButtonLeft={state.incomeButtonLeft}
                   incomeButtonRight={state.incomeButtonRight}
                   indexingButtonLeft={state.indexingButtonLeft}
@@ -238,8 +240,8 @@ const Simulator = () => {
               {state.incomeButtonLeft && state.indexingButtonCenter ? (
                 <Filter
                   cards={simulators}
-                  typeIndex="pos"
-                  typeRend="bruto"
+                  typeIndexing="pos"
+                  typeIncome="bruto"
                   incomeButtonLeft={state.incomeButtonLeft}
                   incomeButtonRight={state.incomeButtonRight}
                   indexingButtonLeft={state.indexingButtonLeft}
@@ -253,8 +255,8 @@ const Simulator = () => {
               {state.incomeButtonLeft && state.indexingButtonRight ? (
                 <Filter
                   cards={simulators}
-                  typeIndex="ipca"
-                  typeRend="bruto"
+                  typeIndexing="ipca"
+                  typeIncome="bruto"
                   incomeButtonLeft={state.incomeButtonLeft}
                   incomeButtonRight={state.incomeButtonRight}
                   indexingButtonLeft={state.indexingButtonLeft}
@@ -268,8 +270,8 @@ const Simulator = () => {
               {state.incomeButtonRight && state.indexingButtonLeft ? (
                 <Filter
                   cards={simulators}
-                  typeIndex="pre"
-                  typeRend="liquido"
+                  typeIndexing="pre"
+                  typeIncome="liquido"
                   incomeButtonLeft={state.incomeButtonLeft}
                   incomeButtonRight={state.incomeButtonRight}
                   indexingButtonLeft={state.indexingButtonLeft}
@@ -283,8 +285,8 @@ const Simulator = () => {
               {state.incomeButtonRight && state.indexingButtonCenter ? (
                 <Filter
                   cards={simulators}
-                  typeIndex="pos"
-                  typeRend="liquido"
+                  typeIndexing="pos"
+                  typeIncome="liquido"
                   incomeButtonLeft={state.incomeButtonLeft}
                   incomeButtonRight={state.incomeButtonRight}
                   indexingButtonLeft={state.indexingButtonLeft}
@@ -297,8 +299,8 @@ const Simulator = () => {
               {state.incomeButtonRight && state.indexingButtonRight ? (
                 <Filter
                   cards={simulators}
-                  typeIndex="ipca"
-                  typeRend="liquido"
+                  typeIndexing="ipca"
+                  typeIncome="liquido"
                   incomeButtonLeft={state.incomeButtonLeft}
                   incomeButtonRight={state.incomeButtonRight}
                   indexingButtonLeft={state.indexingButtonLeft}
