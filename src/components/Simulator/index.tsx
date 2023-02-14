@@ -1,7 +1,6 @@
-import { FormEvent, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GET_INDICATORS, GET_SIMULATORS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
-import useForm from "../../Hooks/useForm";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CheckIcon from "@material-ui/icons/Check";
 import * as S from "./styles";
@@ -13,16 +12,31 @@ import { ISimulators } from "../../interfaces/ISimulators";
 import { IIndicators } from "../../interfaces/IIndicators";
 import SelectMonth from "./SelectMonth";
 import IncomePercentage from "./IncomePercentage";
+import { currencyMask } from "../../utils/currencyMask";
+
+interface IFormState {
+  monthly: string;
+  annual: string;
+}
 
 const Simulator = () => {
   // API
   const [simulators, setSimulators] = useState<ISimulators[]>([]);
   const [indicators, setIndicators] = useState<IIndicators[]>([]);
   const { loading, request } = useFetch();
+  // const [value, setValue] = useState({ monthly: "", annual: "" });
+  const [inputError, setInputError] = useState(false);
+
+  const [formState, setFormState] = useState<IFormState>({
+    monthly: "",
+    annual: "",
+  });
+  console.log(formState?.monthly);
+  console.log(formState?.annual);
 
   // FORM
-  const mensal = useForm();
-  const anual = useForm();
+  // const value = useForm();
+  // const anual = useForm();
 
   // Chamada API buscar indicadores
   const {
@@ -41,12 +55,12 @@ const Simulator = () => {
     if (response) setIndicators(data);
   }
 
-  async function getSimulators() {
+  const getSimulators = useCallback(async () => {
     const { url, options } = GET_SIMULATORS();
 
     const { response, data } = await request(url, options);
     if (response) setSimulators(data);
-  }
+  }, [request]);
 
   // Cards da Simulação
 
@@ -111,9 +125,26 @@ const Simulator = () => {
     color: state.indexingButtonCenter ? "#FFFF" : "#333",
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    getSimulators();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      const { monthly, annual } = formState;
+
+      if (!monthly || !annual) {
+        setInputError(true);
+        return;
+      }
+
+      setInputError(false);
+
+      getSimulators();
+    },
+    [getSimulators, formState]
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormState({ ...formState, [e.target.name]: [e.target.value] });
   };
 
   return (
@@ -180,12 +211,21 @@ const Simulator = () => {
           </S.Grid>
 
           <S.Form onSubmit={(e) => handleSubmit(e)}>
-            <Input label="Aporte Mensal" name="mensal" {...mensal} />
             <Input
-              label="Aporte Anual"
-              name="anual"
-              error="Aporte deve ser um número"
-              {...anual}
+              title="Aporte Mensal"
+              type="text"
+              value={formState.monthly}
+              name="monthly"
+              onChange={(e) => handleChange(currencyMask(e))}
+              error={inputError}
+            />
+            <Input
+              title="Aporte Anual"
+              type="text"
+              value={formState.annual}
+              name="annual"
+              onChange={(e) => handleChange(currencyMask(e))}
+              error={inputError}
             />
 
             <SelectMonth />

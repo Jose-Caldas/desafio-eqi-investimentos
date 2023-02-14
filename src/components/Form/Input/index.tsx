@@ -1,19 +1,39 @@
 import * as S from "./styles";
 
 type InputProps = {
-  label: string;
+  title: string;
+  type: string;
   value: string;
   name: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  error?: string;
+  required?: boolean;
+  error?: boolean;
 };
 
-const Input = ({ label, value, name, onChange, error }: InputProps) => {
+const Input = ({
+  title,
+  type,
+  value,
+  name,
+  onChange,
+  required,
+  error,
+}: InputProps) => {
   return (
     <S.Wrapper>
-      <S.Label htmlFor={name}>{label}</S.Label>
-      <S.CustomInput id={name} name={name} value={value} onChange={onChange} />
-      {error && <p>{error}</p>}
+      <S.Title>{title}</S.Title>
+      <S.InputContainer>
+        <S.Label htmlFor={name}>R$</S.Label>
+        <S.CustomInput
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder="000,00"
+          required={required}
+        />
+      </S.InputContainer>
+      {error && <p>Aporte deve ser um número</p>}
     </S.Wrapper>
   );
 };

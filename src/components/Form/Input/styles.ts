@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   border-bottom: 1px solid #333;
   justify-content: space-between;
+  padding-bottom: 12px;
 
   &:hover,
   :focus {
@@ -21,16 +22,26 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const InputContainer = styled.div`
+  display: flex;
+`;
+
+export const Title = styled.h1`
+  font-size: 12px;
+  margin-bottom: 20px;
+`;
+
 export const CustomInput = styled.input`
   border: none;
   outline: none;
   background-color: transparent;
   font-size: 16px;
-  margin-bottom: 12px;
+  font-weight: 500;
+  color: inherit;
 `;
 
 export const Label = styled.label`
-  font-size: 12px;
-  margin-bottom: 20px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 4px;
 `;
