@@ -11,6 +11,8 @@ import Input from "../Form/Input";
 import Button from "../Form/Button";
 import { ISimulators } from "../../interfaces/ISimulators";
 import { IIndicators } from "../../interfaces/IIndicators";
+import SelectMonth from "./SelectMonth";
+import IncomePercentage from "./IncomePercentage";
 
 const Simulator = () => {
   // API
@@ -21,8 +23,6 @@ const Simulator = () => {
   // FORM
   const mensal = useForm();
   const anual = useForm();
-  const prazo = useForm();
-  const rentabilidade = useForm();
 
   // Chamada API buscar indicadores
   const {
@@ -178,6 +178,7 @@ const Simulator = () => {
               </S.IndexingButtons>
             </S.IndexingWrapper>
           </S.Grid>
+
           <S.Form onSubmit={(e) => handleSubmit(e)}>
             <Input label="Aporte Mensal" name="mensal" {...mensal} />
             <Input
@@ -186,12 +187,9 @@ const Simulator = () => {
               error="Aporte deve ser um número"
               {...anual}
             />
-            <Input label="Prazo (em meses)" name="prazo" {...prazo} />
-            <Input
-              label="Rentabilidade"
-              name="rentabilidade"
-              {...rentabilidade}
-            />
+
+            <SelectMonth />
+            <IncomePercentage />
 
             {indicators.map(({ nome, valor }) => (
               <S.Box key={nome}>

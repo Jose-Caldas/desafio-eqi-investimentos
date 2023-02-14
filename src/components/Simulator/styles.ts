@@ -33,12 +33,6 @@ export const Form = styled.form`
 
 export const Result = styled.div`
   padding: 0 20px;
-
-  button {
-    &:disabled {
-      background-color: red;
-    }
-  }
 `;
 
 export const ResultContainer = styled.div`
@@ -55,23 +49,27 @@ export const GridCard = styled.div`
 `;
 
 export const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-bottom: 1px solid #333;
+  height: 100%;
 
   p {
     margin-bottom: 20px;
     font-size: 12px;
+    font-weight: bold;
   }
   h2 {
     font-size: 16px;
     font-weight: 500;
+    margin-bottom: 12px;
   }
 `;
 
 export const Span = styled.span`
   text-transform: uppercase;
 `;
-
-////////
 
 export const Card = styled.section`
   display: flex;
@@ -96,8 +94,6 @@ export const Card = styled.section`
 export const Text = styled.h1`
   font-size: 12px;
 `;
-
-// buttons left
 
 export const IncomeWrapper = styled.section`
   display: flex;
@@ -155,8 +151,6 @@ export const Icon = styled.div`
   color: white;
   left: 15px;
 `;
-
-// button right
 
 export const IndexingWrapper = styled.section`
   display: flex;

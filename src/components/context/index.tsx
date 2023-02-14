@@ -1,11 +1,11 @@
 import { createContext } from "react";
 
 export const INITIAL_STATE = {
-  incomeButtonLeft: true,
+  incomeButtonLeft: false,
   incomeButtonRight: false,
   indexingButtonLeft: false,
   indexingButtonRight: false,
-  indexingButtonCenter: true,
+  indexingButtonCenter: false,
 };
 
 export type InitialStateType = typeof INITIAL_STATE;
