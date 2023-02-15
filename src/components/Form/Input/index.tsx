@@ -33,7 +33,7 @@ const Input = ({
           required={required}
         />
       </S.InputContainer>
-      {error && <p>Aporte deve ser um número</p>}
+      {error && <p>Este campo deve ser preenchido</p>}
     </S.Wrapper>
   );
 };

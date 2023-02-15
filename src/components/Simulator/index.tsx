@@ -4,7 +4,7 @@ import useFetch from "../../Hooks/useFetch";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CheckIcon from "@material-ui/icons/Check";
 import * as S from "./styles";
-import Filter from "./Filter";
+import CardsFilter from "./CardsFilter";
 import { useAppContext } from "../context/hook";
 import Input from "../Form/Input";
 import Button from "../Form/Button";
@@ -20,25 +20,16 @@ interface IFormState {
 }
 
 const Simulator = () => {
-  // API
   const [simulators, setSimulators] = useState<ISimulators[]>([]);
   const [indicators, setIndicators] = useState<IIndicators[]>([]);
   const { loading, request } = useFetch();
-  // const [value, setValue] = useState({ monthly: "", annual: "" });
   const [inputError, setInputError] = useState(false);
 
   const [formState, setFormState] = useState<IFormState>({
     monthly: "",
     annual: "",
   });
-  console.log(formState?.monthly);
-  console.log(formState?.annual);
 
-  // FORM
-  // const value = useForm();
-  // const anual = useForm();
-
-  // Chamada API buscar indicadores
   const {
     state,
     setIncomeButtonLeft,
@@ -48,12 +39,15 @@ const Simulator = () => {
     setIndexingButtonCenter,
   } = useAppContext();
 
-  async function getIndicators() {
-    const { url, options } = GET_INDICATORS();
+  useEffect(() => {
+    async function getIndicators() {
+      const { url, options } = GET_INDICATORS();
 
-    const { response, data } = await request(url, options);
-    if (response) setIndicators(data);
-  }
+      const { response, data } = await request(url, options);
+      if (response) setIndicators(data);
+    }
+    getIndicators();
+  }, [request]);
 
   const getSimulators = useCallback(async () => {
     const { url, options } = GET_SIMULATORS();
@@ -62,18 +56,19 @@ const Simulator = () => {
     if (response) setSimulators(data);
   }, [request]);
 
-  // Cards da Simulação
-
-  const simulate = () => {
-    getSimulators();
+  const clearForm = () => {
+    setFormState({
+      monthly: "",
+      annual: "",
+    });
   };
 
-  useEffect(() => {
-    getIndicators();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const simulate = () => {
+    const { monthly, annual } = formState;
 
-  // Manipulção dosTipos de rendimentos
+    if (monthly.length > 0 && annual.length > 0) getSimulators();
+  };
+
   const handleLeftIncome = () => {
     setIncomeButtonLeft(true);
     if (state.incomeButtonRight) setIncomeButtonRight(false);
@@ -91,8 +86,6 @@ const Simulator = () => {
     background: state.incomeButtonRight ? "#EA7238" : "#FFFFFF",
     color: state.incomeButtonRight ? "#FFFF" : "#333",
   };
-
-  // Manipulção dosTipos de indexação
 
   const handleLeftIndexing = () => {
     setIndexingButtonLeft(!state.indexingButtonLeft);
@@ -131,16 +124,14 @@ const Simulator = () => {
 
       const { monthly, annual } = formState;
 
-      if (!monthly || !annual) {
+      if (monthly.length === 0 || annual.length === 0) {
         setInputError(true);
         return;
       }
 
       setInputError(false);
-
-      getSimulators();
     },
-    [getSimulators, formState]
+    [formState]
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -241,12 +232,12 @@ const Simulator = () => {
               </S.Box>
             ))}
 
-            <Button title="Limpar campos" types="primary" />
+            <Button title="Limpar campos" types="primary" onClick={clearForm} />
             <Button
               title="Simular"
-              // isLoading={loading}
+              isLoading={loading}
               types="secondary"
-              // disabled={loading}
+              disabled={loading}
               onClick={simulate}
               type="submit"
             />
@@ -261,90 +252,55 @@ const Simulator = () => {
 
             <S.GridCard>
               {state.incomeButtonLeft && state.indexingButtonLeft ? (
-                <Filter
+                <CardsFilter
                   cards={simulators}
                   typeIndexing="pre"
                   typeIncome="bruto"
-                  incomeButtonLeft={state.incomeButtonLeft}
-                  incomeButtonRight={state.incomeButtonRight}
-                  indexingButtonLeft={state.indexingButtonLeft}
-                  indexingButtonCenter={state.indexingButtonCenter}
-                  indexingButtonRight={state.indexingButtonRight}
-                  show={state.incomeButtonLeft && state.indexingButtonLeft}
                   isLoading={loading}
                 />
               ) : null}
 
               {state.incomeButtonLeft && state.indexingButtonCenter ? (
-                <Filter
+                <CardsFilter
                   cards={simulators}
                   typeIndexing="pos"
                   typeIncome="bruto"
-                  incomeButtonLeft={state.incomeButtonLeft}
-                  incomeButtonRight={state.incomeButtonRight}
-                  indexingButtonLeft={state.indexingButtonLeft}
-                  indexingButtonCenter={state.indexingButtonCenter}
-                  indexingButtonRight={state.indexingButtonRight}
-                  show={state.incomeButtonLeft && state.indexingButtonCenter}
                   isLoading={loading}
                 />
               ) : null}
 
               {state.incomeButtonLeft && state.indexingButtonRight ? (
-                <Filter
+                <CardsFilter
                   cards={simulators}
                   typeIndexing="ipca"
                   typeIncome="bruto"
-                  incomeButtonLeft={state.incomeButtonLeft}
-                  incomeButtonRight={state.incomeButtonRight}
-                  indexingButtonLeft={state.indexingButtonLeft}
-                  indexingButtonCenter={state.indexingButtonCenter}
-                  indexingButtonRight={state.indexingButtonRight}
-                  show={state.incomeButtonLeft && state.indexingButtonRight}
                   isLoading={loading}
                 />
               ) : null}
 
               {state.incomeButtonRight && state.indexingButtonLeft ? (
-                <Filter
+                <CardsFilter
                   cards={simulators}
                   typeIndexing="pre"
                   typeIncome="liquido"
-                  incomeButtonLeft={state.incomeButtonLeft}
-                  incomeButtonRight={state.incomeButtonRight}
-                  indexingButtonLeft={state.indexingButtonLeft}
-                  indexingButtonCenter={state.indexingButtonCenter}
-                  indexingButtonRight={state.indexingButtonRight}
-                  show={state.incomeButtonRight && state.indexingButtonLeft}
                   isLoading={loading}
                 />
               ) : null}
 
               {state.incomeButtonRight && state.indexingButtonCenter ? (
-                <Filter
+                <CardsFilter
                   cards={simulators}
                   typeIndexing="pos"
                   typeIncome="liquido"
-                  incomeButtonLeft={state.incomeButtonLeft}
-                  incomeButtonRight={state.incomeButtonRight}
-                  indexingButtonLeft={state.indexingButtonLeft}
-                  indexingButtonCenter={state.indexingButtonCenter}
-                  indexingButtonRight={state.indexingButtonRight}
-                  show={state.incomeButtonRight && state.indexingButtonCenter}
                   isLoading={loading}
                 />
               ) : null}
+
               {state.incomeButtonRight && state.indexingButtonRight ? (
-                <Filter
+                <CardsFilter
                   cards={simulators}
                   typeIndexing="ipca"
                   typeIncome="liquido"
-                  incomeButtonLeft={state.incomeButtonLeft}
-                  incomeButtonRight={state.incomeButtonRight}
-                  indexingButtonLeft={state.indexingButtonLeft}
-                  indexingButtonCenter={state.indexingButtonCenter}
-                  indexingButtonRight={state.indexingButtonRight}
-                  show={state.incomeButtonRight && state.indexingButtonRight}
                   isLoading={loading}
                 />
               ) : null}

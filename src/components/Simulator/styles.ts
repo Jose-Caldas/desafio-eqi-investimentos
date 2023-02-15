@@ -29,6 +29,7 @@ export const Form = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  width: 100%;
 `;
 
 export const Result = styled.div`
@@ -98,7 +99,6 @@ export const Text = styled.h1`
 export const IncomeWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  width: 200px;
 `;
 
 export const Header = styled.header`
@@ -119,7 +119,10 @@ export const IncomeButtons = styled.div`
   background-color: #eee;
   margin-bottom: 30px;
   border-radius: 8px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const IncomeLeft = styled.button`
@@ -155,7 +158,6 @@ export const Icon = styled.div`
 export const IndexingWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  width: 200px;
 `;
 
 export const IndexingTitle = styled.h1`
@@ -169,7 +171,11 @@ export const IndexingButtons = styled.div`
   background-color: #eee;
   margin-bottom: 30px;
   border-radius: 8px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+  justify-content: space-between;
+
+  &:hover {
+    box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const IndexingLeft = styled.button`
@@ -204,5 +210,6 @@ export const IndexingRight = styled.button`
   border: none;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+  padding: 0 6px;
   cursor: pointer;
 `;
