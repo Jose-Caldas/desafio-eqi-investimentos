@@ -10,50 +10,50 @@ type TProps = {
 export const AppContextProvider = ({ children }: TProps) => {
   const [state, dispatch] = useReducer(appContextReducer, INITIAL_STATE);
   const setIncomeButtonLeft = useCallback(
-    (state: boolean) => {
+    (newState: boolean) => {
       dispatch({
         type: AppContextActions.SetIncomeButtonLeft,
-        payload: { state },
+        payload: { newState },
       });
     },
     [dispatch]
   );
 
   const setIncomeButtonRight = useCallback(
-    (state: boolean) => {
+    (newState: boolean) => {
       dispatch({
         type: AppContextActions.SetIncomeButtonRight,
-        payload: { state },
+        payload: { newState },
       });
     },
     [dispatch]
   );
 
   const setIndexingButtonLeft = useCallback(
-    (state: boolean) => {
+    (newState: boolean) => {
       dispatch({
         type: AppContextActions.SetIndexingButtonLeft,
-        payload: { state },
+        payload: { newState },
       });
     },
     [dispatch]
   );
 
   const setIndexingButtonRight = useCallback(
-    (state: boolean) => {
+    (newState: boolean) => {
       dispatch({
         type: AppContextActions.SetIndexingButtonRight,
-        payload: { state },
+        payload: { newState },
       });
     },
     [dispatch]
   );
 
   const setIndexingButtonCenter = useCallback(
-    (state: boolean) => {
+    (newState: boolean) => {
       dispatch({
         type: AppContextActions.SetIndexingButtonCenter,
-        payload: { state },
+        payload: { newState },
       });
     },
     [dispatch]

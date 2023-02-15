@@ -11,10 +11,9 @@ export const Wrapper = styled.header`
 `;
 
 export const Title = styled.h1`
-  margin: 0;
+  margin: 10px 0;
   text-align: center;
   font-size: 16px;
-  margin-bottom: 4px;
 `;
 
 export const Menu = styled.nav`

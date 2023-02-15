@@ -2,7 +2,7 @@ import { Wrapper, Title, Value } from "./styles";
 
 type CardProps = {
   title: string;
-  value: string;
+  value: string | number;
 };
 
 export const Card = ({ title, value }: CardProps) => {
