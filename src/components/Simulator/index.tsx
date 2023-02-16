@@ -13,6 +13,7 @@ import { IIndicators } from "../../interfaces/IIndicators";
 import SelectMonth from "./SelectMonth";
 import IncomePercentage from "./IncomePercentage";
 import { currencyMask } from "../../utils/currencyMask";
+import GraphsFilter from "./GraphsFilter";
 
 interface IFormState {
   monthly: string;
@@ -307,6 +308,24 @@ const Simulator = () => {
             </S.GridCard>
 
             <S.SubTitle>Pojeção de Valores</S.SubTitle>
+            {state.incomeButtonLeft && state.indexingButtonLeft ? (
+              <GraphsFilter typeIncome="bruto" typeIndexing="pre" />
+            ) : null}
+            {state.incomeButtonLeft && state.indexingButtonCenter ? (
+              <GraphsFilter typeIncome="bruto" typeIndexing="pos" />
+            ) : null}
+            {state.incomeButtonLeft && state.indexingButtonRight ? (
+              <GraphsFilter typeIncome="bruto" typeIndexing="ipca" />
+            ) : null}
+            {state.incomeButtonRight && state.indexingButtonLeft ? (
+              <GraphsFilter typeIncome="liquido" typeIndexing="pre" />
+            ) : null}
+            {state.incomeButtonRight && state.indexingButtonCenter ? (
+              <GraphsFilter typeIncome="liquido" typeIndexing="pos" />
+            ) : null}
+            {state.incomeButtonRight && state.indexingButtonRight ? (
+              <GraphsFilter typeIncome="liquido" typeIndexing="ipca" />
+            ) : null}
           </S.Result>
         </S.ResultContainer>
       </S.Section>
