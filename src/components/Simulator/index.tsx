@@ -1,19 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
 import { GET_INDICATORS, GET_SIMULATORS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import CheckIcon from "@material-ui/icons/Check";
 import * as S from "./styles";
 import CardsFilter from "./CardsFilter";
 import { useAppContext } from "../context/hook";
-import Input from "../Form/Input";
-import Button from "../Form/Button";
+import Input from "../Input";
+import Button from "../Button";
 import { ISimulators } from "../../interfaces/ISimulators";
 import { IIndicators } from "../../interfaces/IIndicators";
 import SelectMonth from "./SelectMonth";
 import IncomePercentage from "./IncomePercentage";
 import { currencyMask } from "../../utils/currencyMask";
 import GraphsFilter from "./GraphsFilter";
+import IncomeOptions from "./Card/IncomeOptions";
+import IndexingOptions from "./Card/IndexingOptions";
 
 interface IFormState {
   monthly: string;
@@ -31,14 +31,7 @@ const Simulator = () => {
     annual: "",
   });
 
-  const {
-    state,
-    setIncomeButtonLeft,
-    setIncomeButtonRight,
-    setIndexingButtonLeft,
-    setIndexingButtonRight,
-    setIndexingButtonCenter,
-  } = useAppContext();
+  const { state } = useAppContext();
 
   useEffect(() => {
     async function getIndicators() {
@@ -70,55 +63,6 @@ const Simulator = () => {
     if (monthly.length > 0 && annual.length > 0) getSimulators();
   };
 
-  const handleLeftIncome = () => {
-    setIncomeButtonLeft(true);
-    if (state.incomeButtonRight) setIncomeButtonRight(false);
-  };
-  const handleRightIncome = () => {
-    setIncomeButtonRight(true);
-    if (state.incomeButtonLeft) setIncomeButtonLeft(false);
-  };
-
-  const styledIncomeLeft = {
-    background: state.incomeButtonLeft ? "#EA7238" : "#FFFFFF",
-    color: state.incomeButtonLeft ? "#FFFF" : "#333",
-  };
-  const styledIncomeRight = {
-    background: state.incomeButtonRight ? "#EA7238" : "#FFFFFF",
-    color: state.incomeButtonRight ? "#FFFF" : "#333",
-  };
-
-  const handleLeftIndexing = () => {
-    setIndexingButtonLeft(!state.indexingButtonLeft);
-    if (state.indexingButtonRight) setIndexingButtonRight(false);
-    if (state.indexingButtonCenter) setIndexingButtonCenter(false);
-  };
-
-  const handleCenterIndexing = () => {
-    setIndexingButtonCenter(!state.indexingButtonCenter);
-    if (state.indexingButtonRight) setIndexingButtonRight(false);
-    if (state.indexingButtonLeft) setIndexingButtonLeft(false);
-  };
-
-  const handleRightIndexing = () => {
-    setIndexingButtonRight(!state.indexingButtonRight);
-    if (state.indexingButtonLeft) setIndexingButtonLeft(false);
-    if (state.indexingButtonCenter) setIndexingButtonCenter(false);
-  };
-
-  const styledButtonLeft = {
-    background: state.indexingButtonLeft ? "#EA7238" : "#FFFFFF",
-    color: state.indexingButtonLeft ? "#FFFF" : "#333",
-  };
-  const styledButtonRight = {
-    background: state.indexingButtonRight ? "#EA7238" : "#FFFFFF",
-    color: state.indexingButtonRight ? "#FFFF" : "#333",
-  };
-  const styledButtonCenter = {
-    background: state.indexingButtonCenter ? "#EA7238" : "#FFFFFF",
-    color: state.indexingButtonCenter ? "#FFFF" : "#333",
-  };
-
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -143,64 +87,13 @@ const Simulator = () => {
     <S.Wrapper>
       <S.Title>Simulador de investimentos</S.Title>
       <S.SubTitle>Simulador</S.SubTitle>
-      <S.Section>
-        <S.SimulateContainer>
-          <S.Grid>
-            <S.IncomeWrapper>
-              <S.Header>
-                <S.IncomeTitle>Rendimento</S.IncomeTitle>
-                <InfoOutlinedIcon fontSize="small" />
-              </S.Header>
-              <S.IncomeButtons>
-                <S.IncomeLeft
-                  onClick={handleLeftIncome}
-                  style={{ ...styledIncomeLeft }}
-                >
-                  <S.Icon>
-                    {state.incomeButtonLeft && <CheckIcon fontSize="small" />}
-                  </S.Icon>
-                  Bruto
-                </S.IncomeLeft>
 
-                <S.IncomeRight
-                  onClick={handleRightIncome}
-                  style={{ ...styledIncomeRight }}
-                >
-                  {state.incomeButtonRight && <CheckIcon fontSize="small" />}
-                  Líquido
-                </S.IncomeRight>
-              </S.IncomeButtons>
-            </S.IncomeWrapper>
-            <S.IndexingWrapper>
-              <S.Header>
-                <S.IndexingTitle>Tipos de indexação</S.IndexingTitle>
-                <InfoOutlinedIcon fontSize="small" />
-              </S.Header>
-              <S.IndexingButtons>
-                <S.IndexingLeft
-                  onClick={handleLeftIndexing}
-                  style={{ ...styledButtonLeft }}
-                >
-                  {state.indexingButtonLeft && <CheckIcon fontSize="small" />}
-                  PRÉ
-                </S.IndexingLeft>
-                <S.IndexingCenter
-                  onClick={handleCenterIndexing}
-                  style={{ ...styledButtonCenter }}
-                >
-                  {state.indexingButtonCenter && <CheckIcon fontSize="small" />}
-                  POS
-                </S.IndexingCenter>
-                <S.IndexingRight
-                  onClick={handleRightIndexing}
-                  style={{ ...styledButtonRight }}
-                >
-                  {state.indexingButtonRight && <CheckIcon fontSize="small" />}
-                  FIXADO
-                </S.IndexingRight>
-              </S.IndexingButtons>
-            </S.IndexingWrapper>
-          </S.Grid>
+      <S.Section>
+        <S.Container>
+          <S.Options>
+            <IncomeOptions />
+            <IndexingOptions />
+          </S.Options>
 
           <S.Form onSubmit={(e) => handleSubmit(e)}>
             <Input
@@ -243,7 +136,7 @@ const Simulator = () => {
               type="submit"
             />
           </S.Form>
-        </S.SimulateContainer>
+        </S.Container>
 
         <S.ResultContainer>
           <S.Result>
@@ -307,25 +200,32 @@ const Simulator = () => {
               ) : null}
             </S.GridCard>
 
-            <S.SubTitle>Pojeção de Valores</S.SubTitle>
-            {state.incomeButtonLeft && state.indexingButtonLeft ? (
-              <GraphsFilter typeIncome="bruto" typeIndexing="pre" />
-            ) : null}
-            {state.incomeButtonLeft && state.indexingButtonCenter ? (
-              <GraphsFilter typeIncome="bruto" typeIndexing="pos" />
-            ) : null}
-            {state.incomeButtonLeft && state.indexingButtonRight ? (
-              <GraphsFilter typeIncome="bruto" typeIndexing="ipca" />
-            ) : null}
-            {state.incomeButtonRight && state.indexingButtonLeft ? (
-              <GraphsFilter typeIncome="liquido" typeIndexing="pre" />
-            ) : null}
-            {state.incomeButtonRight && state.indexingButtonCenter ? (
-              <GraphsFilter typeIncome="liquido" typeIndexing="pos" />
-            ) : null}
-            {state.incomeButtonRight && state.indexingButtonRight ? (
-              <GraphsFilter typeIncome="liquido" typeIndexing="ipca" />
-            ) : null}
+            <>
+              <S.SubTitle>Pojeção de Valores</S.SubTitle>
+              {state.incomeButtonLeft && state.indexingButtonLeft ? (
+                <GraphsFilter typeIncome="bruto" typeIndexing="pre" />
+              ) : null}
+
+              {state.incomeButtonLeft && state.indexingButtonCenter ? (
+                <GraphsFilter typeIncome="bruto" typeIndexing="pos" />
+              ) : null}
+
+              {state.incomeButtonLeft && state.indexingButtonRight ? (
+                <GraphsFilter typeIncome="bruto" typeIndexing="ipca" />
+              ) : null}
+
+              {state.incomeButtonRight && state.indexingButtonLeft ? (
+                <GraphsFilter typeIncome="liquido" typeIndexing="pre" />
+              ) : null}
+
+              {state.incomeButtonRight && state.indexingButtonCenter ? (
+                <GraphsFilter typeIncome="liquido" typeIndexing="pos" />
+              ) : null}
+
+              {state.incomeButtonRight && state.indexingButtonRight ? (
+                <GraphsFilter typeIncome="liquido" typeIndexing="ipca" />
+              ) : null}
+            </>
           </S.Result>
         </S.ResultContainer>
       </S.Section>

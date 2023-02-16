@@ -85,7 +85,6 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
                   },
                 ]}
                 alignment="start"
-                // labels={({ datum }) => ` ${datum.x}`}
                 style={{
                   data: {
                     fill: "#EA7238",
