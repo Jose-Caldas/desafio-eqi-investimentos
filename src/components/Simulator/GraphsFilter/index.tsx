@@ -3,6 +3,7 @@ import { GET_SIMULATORS } from "../../../api";
 import useFetch from "../../../Hooks/useFetch";
 import { ISimulators } from "../../../interfaces/ISimulators";
 import { VictoryChart, VictoryBar } from "victory";
+import * as S from "./styles";
 
 type GraphsFilterProps = {
   typeIndexing: string;
@@ -30,13 +31,13 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
   );
 
   return (
-    <div style={{ display: "flex", gap: 20 }}>
-      <div>
-        {getCard.map(({ graficoValores }) => (
-          <>
+    <S.Container>
+      <S.Content>
+        {getCard.map(({ graficoValores }, index) => (
+          <S.Graph>
             <VictoryChart>
               <VictoryBar
-                key={graficoValores.comAporte[0]}
+                key={index}
                 data={[
                   {
                     x: "0",
@@ -84,6 +85,7 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
                   },
                 ]}
                 alignment="start"
+                // labels={({ datum }) => ` ${datum.x}`}
                 style={{
                   data: {
                     fill: "#EA7238",
@@ -91,16 +93,17 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
                 }}
               />
             </VictoryChart>
-            <p style={{ textAlign: "center" }}>Com Aporte</p>
-          </>
+            <h1>Tempo (meses)</h1>
+            <p>Com Aporte</p>
+          </S.Graph>
         ))}
-      </div>
-      <div>
-        {getCard.map(({ graficoValores }) => (
-          <>
+      </S.Content>
+      <S.Content>
+        {getCard.map(({ graficoValores }, index) => (
+          <S.Graph>
             <VictoryChart>
               <VictoryBar
-                key={graficoValores.semAporte[0]}
+                key={index}
                 data={[
                   {
                     x: "0",
@@ -150,11 +153,12 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
                 alignment="start"
               />
             </VictoryChart>
-            <p style={{ textAlign: "center" }}>Sem Aporte</p>
-          </>
+            <h1>Tempo (meses)</h1>
+            <h2>Sem Aporte</h2>
+          </S.Graph>
         ))}
-      </div>
-    </div>
+      </S.Content>
+    </S.Container>
   );
 };
 
