@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 70%;
+  max-width: 1600px;
   min-height: 800px;
   background-color: #ddd;
   margin: 40px auto;

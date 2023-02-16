@@ -20,6 +20,7 @@ export const Menu = styled.nav`
   display: flex;
   justify-content: space-between;
   width: 70%;
+  max-width: 1600px;
   gap: 10px;
 
   @media (max-width: 445px) {

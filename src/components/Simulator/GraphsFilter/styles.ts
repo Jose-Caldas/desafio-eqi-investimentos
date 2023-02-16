@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   gap: 20px;
+
+  @media (max-width: 820px) {
+    flex-direction: column;
+  }
 `;
 
 export const Content = styled.section`
@@ -28,6 +32,10 @@ export const Graph = styled.div`
     font-size: 12px;
     margin-top: 16px;
 
+    @media (max-width: 280px) {
+      font-size: 10px;
+    }
+
     &::before {
       content: "";
       display: inline-block;
@@ -43,6 +51,10 @@ export const Graph = styled.div`
     font-size: 12px;
     margin-top: 16px;
     font-weight: bold;
+
+    @media (max-width: 280px) {
+      font-size: 10px;
+    }
 
     &::before {
       content: "";

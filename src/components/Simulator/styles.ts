@@ -7,7 +7,7 @@ export const Title = styled.h1`
   margin: 0;
   margin-bottom: 30px;
 
-  @media (max-width: 390px) {
+  @media (max-width: 540px) {
     font-size: 16px;
   }
 `;
@@ -85,6 +85,10 @@ export const GridCard = styled.div`
   gap: 50px;
   padding: 20px 0;
   width: 100%;
+
+  @media (max-width: 540px) {
+    gap: 30px;
+  }
 `;
 
 export const Span = styled.span`
