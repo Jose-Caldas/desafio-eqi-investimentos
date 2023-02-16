@@ -12,8 +12,8 @@ import SelectMonth from "./SelectMonth";
 import IncomePercentage from "./IncomePercentage";
 import { currencyMask } from "../../utils/currencyMask";
 import GraphsFilter from "./GraphsFilter";
-import IncomeOptions from "./Card/IncomeOptions";
-import IndexingOptions from "./Card/IndexingOptions";
+import IncomeOptions from "./Options/IncomeOptions";
+import IndexingOptions from "./Options/IndexingOptions";
 
 interface IFormState {
   monthly: string;
