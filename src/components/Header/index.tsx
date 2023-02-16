@@ -24,7 +24,6 @@ const Header = () => {
             <HomeOutlinedIcon />
           </S.Icon>
         </S.IconWrapper>
-        <S.InputCenter />
         <S.SearchWrapper>
           <S.Search>
             <SearchOutlinedIcon />

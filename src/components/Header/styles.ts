@@ -17,10 +17,14 @@ export const Title = styled.h1`
 `;
 
 export const Menu = styled.nav`
-  display: grid;
-  grid-template-columns: 200px 1fr 400px;
-  width: 80%;
-  gap: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  gap: 10px;
+
+  @media (max-width: 445px) {
+    flex-direction: column;
+  }
 `;
 
 export const IconWrapper = styled.div`
@@ -28,15 +32,6 @@ export const IconWrapper = styled.div`
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-content: center;
-`;
-
-export const InputCenter = styled.input`
-  width: 100%;
-  background-color: white;
-  border: none;
-  outline: none;
-  border-radius: 16px;
-  margin-right: 30px;
 `;
 
 export const SearchWrapper = styled.div`

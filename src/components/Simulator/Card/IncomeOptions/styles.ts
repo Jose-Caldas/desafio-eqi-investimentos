@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const Wrapper = styled.section`
   margin-top: 30px;
+
+  @media (max-width: 895px) {
+    margin-top: 20px;
+  }
 `;
 
 export const Header = styled.header`
@@ -16,8 +20,6 @@ export const IncomeTitle = styled.h1`
 
 export const IncomeButtons = styled.div`
   display: flex;
-  /* align-items: center;
-  justify-content: space-between; */
   width: 100%;
   height: 50px;
   background-color: #eee;
@@ -55,9 +57,3 @@ export const IncomeRight = styled.button`
 
   cursor: pointer;
 `;
-
-// export const Icon = styled.div`
-//   position: absolute;
-//   color: white;
-//   left: 15px;
-// `;

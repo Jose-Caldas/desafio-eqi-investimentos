@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const Wrapper = styled.section`
   margin-top: 30px;
+
+  @media (max-width: 895px) {
+    margin-top: 0;
+  }
 `;
 
 export const Header = styled.header`
@@ -21,7 +25,6 @@ export const IndexingButtons = styled.div`
   background-color: #eee;
   margin: 16px 0 30px;
   border-radius: 8px;
-  /* justify-content: space-between; */
 
   &:hover {
     box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.3);
@@ -63,9 +66,3 @@ export const IndexingRight = styled.button`
   padding: 0 6px;
   cursor: pointer;
 `;
-
-// export const Icon = styled.div`
-//   position: absolute;
-//   color: white;
-//   left: 15px;
-// `;

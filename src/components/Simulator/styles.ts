@@ -6,6 +6,10 @@ export const Title = styled.h1`
   text-align: center;
   margin: 0;
   margin-bottom: 30px;
+
+  @media (max-width: 390px) {
+    font-size: 16px;
+  }
 `;
 
 export const SubTitle = styled.h2`
@@ -18,6 +22,10 @@ export const Section = styled.section`
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 80px;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Container = styled.div``;
@@ -26,12 +34,21 @@ export const Options = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+
+  @media (max-width: 895px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 `;
 
 export const Form = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+
+  @media (max-width: 895px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Box = styled.div`
@@ -46,6 +63,7 @@ export const Box = styled.div`
     font-size: 12px;
     font-weight: bold;
   }
+
   h2 {
     font-size: 16px;
     font-weight: 500;
@@ -72,7 +90,3 @@ export const GridCard = styled.div`
 export const Span = styled.span`
   text-transform: uppercase;
 `;
-
-// export const Text = styled.h1`
-//   font-size: 12px;
-// `;
