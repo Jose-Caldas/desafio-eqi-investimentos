@@ -57,31 +57,30 @@ const Simulator = () => {
     });
   };
 
-  const simulate = () => {
-    const { monthly, annual } = formState;
-
-    if (monthly.length > 0 && annual.length > 0) getSimulators();
-  };
-
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const { monthly, annual } = formState;
-
-      if (monthly.length === 0 || annual.length === 0) {
+      if (formState.monthly.length === 0 || formState.annual.length === 0) {
         setInputError(true);
         return;
       }
 
       setInputError(false);
+      getSimulators();
     },
-    [formState]
+
+    [formState, getSimulators]
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({ ...formState, [e.target.name]: [e.target.value] });
   };
+
+  const showSimulate =
+    formState.monthly.length !== 0 && formState.annual.length !== 0;
+
+  console.log(formState.monthly.length);
 
   return (
     <S.Wrapper>
@@ -132,7 +131,6 @@ const Simulator = () => {
               isLoading={loading}
               types="secondary"
               disabled={loading}
-              onClick={simulate}
               type="submit"
             />
           </S.Form>
@@ -145,7 +143,9 @@ const Simulator = () => {
             </h1>
 
             <S.GridCard>
-              {state.incomeButtonLeft && state.indexingButtonLeft ? (
+              {state.incomeButtonLeft &&
+              state.indexingButtonLeft &&
+              showSimulate ? (
                 <CardsFilter
                   cards={simulators}
                   typeIndexing="pre"
@@ -154,7 +154,9 @@ const Simulator = () => {
                 />
               ) : null}
 
-              {state.incomeButtonLeft && state.indexingButtonCenter ? (
+              {state.incomeButtonLeft &&
+              state.indexingButtonCenter &&
+              showSimulate ? (
                 <CardsFilter
                   cards={simulators}
                   typeIndexing="pos"
@@ -163,7 +165,9 @@ const Simulator = () => {
                 />
               ) : null}
 
-              {state.incomeButtonLeft && state.indexingButtonRight ? (
+              {state.incomeButtonLeft &&
+              state.indexingButtonRight &&
+              showSimulate ? (
                 <CardsFilter
                   cards={simulators}
                   typeIndexing="ipca"
@@ -172,7 +176,9 @@ const Simulator = () => {
                 />
               ) : null}
 
-              {state.incomeButtonRight && state.indexingButtonLeft ? (
+              {state.incomeButtonRight &&
+              state.indexingButtonLeft &&
+              showSimulate ? (
                 <CardsFilter
                   cards={simulators}
                   typeIndexing="pre"
@@ -181,7 +187,9 @@ const Simulator = () => {
                 />
               ) : null}
 
-              {state.incomeButtonRight && state.indexingButtonCenter ? (
+              {state.incomeButtonRight &&
+              state.indexingButtonCenter &&
+              showSimulate ? (
                 <CardsFilter
                   cards={simulators}
                   typeIndexing="pos"
@@ -190,7 +198,9 @@ const Simulator = () => {
                 />
               ) : null}
 
-              {state.incomeButtonRight && state.indexingButtonRight ? (
+              {state.incomeButtonRight &&
+              state.indexingButtonRight &&
+              showSimulate ? (
                 <CardsFilter
                   cards={simulators}
                   typeIndexing="ipca"
@@ -202,27 +212,39 @@ const Simulator = () => {
 
             <>
               <S.SubTitle>Pojeção de Valores</S.SubTitle>
-              {state.incomeButtonLeft && state.indexingButtonLeft ? (
+              {state.incomeButtonLeft &&
+              state.indexingButtonLeft &&
+              showSimulate ? (
                 <GraphsFilter typeIncome="bruto" typeIndexing="pre" />
               ) : null}
 
-              {state.incomeButtonLeft && state.indexingButtonCenter ? (
+              {state.incomeButtonLeft &&
+              state.indexingButtonCenter &&
+              showSimulate ? (
                 <GraphsFilter typeIncome="bruto" typeIndexing="pos" />
               ) : null}
 
-              {state.incomeButtonLeft && state.indexingButtonRight ? (
+              {state.incomeButtonLeft &&
+              state.indexingButtonRight &&
+              showSimulate ? (
                 <GraphsFilter typeIncome="bruto" typeIndexing="ipca" />
               ) : null}
 
-              {state.incomeButtonRight && state.indexingButtonLeft ? (
+              {state.incomeButtonRight &&
+              state.indexingButtonLeft &&
+              showSimulate ? (
                 <GraphsFilter typeIncome="liquido" typeIndexing="pre" />
               ) : null}
 
-              {state.incomeButtonRight && state.indexingButtonCenter ? (
+              {state.incomeButtonRight &&
+              state.indexingButtonCenter &&
+              showSimulate ? (
                 <GraphsFilter typeIncome="liquido" typeIndexing="pos" />
               ) : null}
 
-              {state.incomeButtonRight && state.indexingButtonRight ? (
+              {state.incomeButtonRight &&
+              state.indexingButtonRight &&
+              showSimulate ? (
                 <GraphsFilter typeIncome="liquido" typeIndexing="ipca" />
               ) : null}
             </>
