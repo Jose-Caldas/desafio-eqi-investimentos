@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { GET_SIMULATORS } from "../../../api";
-import useFetch from "../../../Hooks/useFetch";
-import { ISimulators } from "../../../interfaces/ISimulators";
 import { VictoryChart, VictoryBar } from "victory";
+import { useGraphContext } from "../../context/GraphContext";
 import * as S from "./styles";
 
 type GraphsFilterProps = {
@@ -11,17 +8,7 @@ type GraphsFilterProps = {
 };
 
 const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
-  const [graphs, setGraphs] = useState<ISimulators[]>([]);
-  const { request } = useFetch();
-
-  useEffect(() => {
-    async function getGraphs() {
-      const { url, options } = GET_SIMULATORS();
-      const { response, data } = await request(url, options);
-      if (response) setGraphs(data);
-    }
-    getGraphs();
-  }, [request]);
+  const { graphs } = useGraphContext();
 
   let cardList = graphs ? Object.values(graphs) : [];
 
@@ -85,6 +72,10 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
                   },
                 ]}
                 alignment="start"
+                animate={{
+                  duration: 2000,
+                  onLoad: { duration: 1000 },
+                }}
                 style={{
                   data: {
                     fill: "#EA7238",
@@ -150,6 +141,10 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
                   },
                 ]}
                 alignment="start"
+                animate={{
+                  duration: 2000,
+                  onLoad: { duration: 1000 },
+                }}
               />
             </VictoryChart>
             <h1>Tempo (meses)</h1>

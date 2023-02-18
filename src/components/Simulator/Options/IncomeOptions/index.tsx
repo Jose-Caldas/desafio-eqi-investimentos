@@ -3,7 +3,7 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CheckIcon from "@material-ui/icons/Check";
 
 import * as S from "./styles";
-import { useAppContext } from "../../../context/hook";
+import { useAppContext } from "../../../context/AppContext/hook";
 
 const IncomeOptions = () => {
   const { state, setIncomeButtonLeft, setIncomeButtonRight } = useAppContext();

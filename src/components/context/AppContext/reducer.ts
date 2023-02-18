@@ -1,5 +1,5 @@
 import { InitialStateType, INITIAL_STATE } from ".";
-import { AppContextActions } from "../../enums/AppContextActions";
+import { AppContextActions } from "../../../enums/AppContextActions";
 
 type DispatchActionProps = {
   type: AppContextActions;

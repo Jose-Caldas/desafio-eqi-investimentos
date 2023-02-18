@@ -1,6 +1,6 @@
 import { useCallback, useReducer } from "react";
 import { AppContext, INITIAL_STATE } from ".";
-import { AppContextActions } from "../../enums/AppContextActions";
+import { AppContextActions } from "../../../enums/AppContextActions";
 import { appContextReducer } from "./reducer";
 
 type TProps = {

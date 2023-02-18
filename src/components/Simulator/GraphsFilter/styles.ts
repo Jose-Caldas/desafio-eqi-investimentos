@@ -13,13 +13,6 @@ export const Content = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &::before {
-    content: "valor";
-    transform: rotate(-90deg);
-    font-size: 10px;
-    text-align: center;
-  }
 `;
 
 export const Graph = styled.div`

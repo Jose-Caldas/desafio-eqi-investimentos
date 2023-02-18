@@ -3,7 +3,7 @@ import { GET_INDICATORS, GET_SIMULATORS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
 import * as S from "./styles";
 import CardsFilter from "./CardsFilter";
-import { useAppContext } from "../context/hook";
+import { useAppContext } from "../context/AppContext/hook";
 import Input from "../Input";
 import Button from "../Button";
 import { ISimulators } from "../../interfaces/ISimulators";
@@ -14,6 +14,7 @@ import { currencyMask } from "../../utils/currencyMask";
 import GraphsFilter from "./GraphsFilter";
 import IncomeOptions from "./Options/IncomeOptions";
 import IndexingOptions from "./Options/IndexingOptions";
+import { useGraphContext } from "../context/GraphContext";
 
 interface IFormState {
   monthly: string;
@@ -32,6 +33,7 @@ const Simulator = () => {
   });
 
   const { state } = useAppContext();
+  const { getGraphs } = useGraphContext();
 
   useEffect(() => {
     async function getIndicators() {
@@ -68,9 +70,10 @@ const Simulator = () => {
 
       setInputError(false);
       getSimulators();
+      getGraphs();
     },
 
-    [formState, getSimulators]
+    [formState, getSimulators, getGraphs]
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,8 +82,6 @@ const Simulator = () => {
 
   const showSimulate =
     formState.monthly.length !== 0 && formState.annual.length !== 0;
-
-  console.log(formState.monthly.length);
 
   return (
     <S.Wrapper>

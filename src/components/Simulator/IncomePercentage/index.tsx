@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppContext } from "../../context/hook";
+import { useAppContext } from "../../context/AppContext/hook";
 import * as S from "./styles";
 
 const IncomePercentage = () => {
