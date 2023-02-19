@@ -82,16 +82,6 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
                   },
                 }}
               />
-            </VictoryChart>
-            <h1>Tempo (meses)</h1>
-            <p>Com Aporte</p>
-          </S.Graph>
-        ))}
-      </S.Content>
-      <S.Content>
-        {getCard.map(({ graficoValores }, index) => (
-          <S.Graph>
-            <VictoryChart>
               <VictoryBar
                 key={index}
                 data={[
@@ -140,7 +130,7 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
                     y: graficoValores.semAporte[10],
                   },
                 ]}
-                alignment="start"
+                // alignment="start"
                 animate={{
                   duration: 2000,
                   onLoad: { duration: 1000 },
@@ -148,7 +138,10 @@ const GraphsFilter = ({ typeIncome, typeIndexing }: GraphsFilterProps) => {
               />
             </VictoryChart>
             <h1>Tempo (meses)</h1>
-            <h2>Sem Aporte</h2>
+            <S.Legend>
+              <S.Subtitle>Com aporte</S.Subtitle>
+              <S.Subtitle>Sem aporte</S.Subtitle>
+            </S.Legend>
           </S.Graph>
         ))}
       </S.Content>
