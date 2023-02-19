@@ -25,7 +25,7 @@ const Simulator = () => {
   const [simulators, setSimulators] = useState<ISimulators[]>([]);
   const [indicators, setIndicators] = useState<IIndicators[]>([]);
   const { loading, request } = useFetch();
-  const [inputError, setInputError] = useState(false);
+  const [inputError, setInputError] = useState("");
 
   const [formState, setFormState] = useState<IFormState>({
     monthly: "",
@@ -64,17 +64,27 @@ const Simulator = () => {
       e.preventDefault();
 
       if (formState.monthly.length === 0 || formState.annual.length === 0) {
-        setInputError(true);
+        setInputError("Preencha um valor");
         return;
       }
 
-      setInputError(false);
+      setInputError("");
       getSimulators();
       getGraphs();
     },
 
     [formState, getSimulators, getGraphs]
   );
+
+  const regex = /^(0|[1-9][0-9]{0,2})(.\d{3})*(,\d{1,2})?$/;
+
+  const validate = (inputValue: string) => {
+    if (!regex.test(inputValue)) {
+      setInputError("Aporte deve ser um número");
+    } else {
+      setInputError("");
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({ ...formState, [e.target.name]: [e.target.value] });
@@ -99,18 +109,24 @@ const Simulator = () => {
             <Input
               title="Aporte Mensal"
               type="text"
+              label="R$"
               value={formState.monthly}
               name="monthly"
               onChange={(e) => handleChange(currencyMask(e))}
               error={inputError}
+              onInput={() => validate(formState.monthly)}
+              placeholder="0,00"
             />
             <Input
               title="Aporte Anual"
               type="text"
+              label="R$"
               value={formState.annual}
               name="annual"
               onChange={(e) => handleChange(currencyMask(e))}
               error={inputError}
+              onInput={() => validate(formState.annual)}
+              placeholder="0,00"
             />
 
             <SelectMonth />

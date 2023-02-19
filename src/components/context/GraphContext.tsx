@@ -39,7 +39,4 @@ export const GraphContextProvider = ({ children }: ContextProps) => {
   );
 };
 
-export const useGraphContext = () => {
-  const context = useContext(GraphContext);
-  return context;
-};
+export const useGraphContext = () => useContext(GraphContext);

@@ -3,37 +3,41 @@ import * as S from "./styles";
 type InputProps = {
   title: string;
   type: string;
+  label: string;
   value: string;
   name: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  required?: boolean;
-  error?: boolean;
+  error: string;
+  onInput?: (e: React.FormEvent<HTMLInputElement>) => void;
+  placeholder?: string;
 };
 
 const Input = ({
   title,
   type,
+  label,
   value,
   name,
   onChange,
-  required,
   error,
+  onInput,
+  placeholder,
 }: InputProps) => {
   return (
     <S.Wrapper>
-      <S.Title>{title}</S.Title>
+      <S.Title style={{ color: error ? "#f62e36" : "#333" }}>{title}</S.Title>
       <S.InputContainer>
-        <S.Label htmlFor={name}>R$</S.Label>
+        <S.Label htmlFor={name}>{label}</S.Label>
         <S.CustomInput
           type={type}
           name={name}
           value={value}
           onChange={onChange}
-          placeholder="000,00"
-          required={required}
+          placeholder={placeholder}
+          onInput={onInput}
         />
       </S.InputContainer>
-      {error && <p>Este campo deve ser preenchido</p>}
+      {error && <p>{error}</p>}
     </S.Wrapper>
   );
 };
